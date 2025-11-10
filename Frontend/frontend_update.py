@@ -1,147 +1,208 @@
 import streamlit as st
 import requests
-import pandas as pd
 import time
+from datetime import datetime
 
-BACKEND_URL = "http://localhost:8000"
+# --------------------------
+# Config
+# --------------------------
+BACKEND_URL = "http://localhost:8000/data"
+OPENWEATHER_API = "https://openweathermap.org/data/2.5/weather"
+OPENWEATHER_KEY = "439d4b804bc8187953eb36d2a8c26a02"  # Demo key (use your own for full data)
 
-st.set_page_config(page_title="ESP Weather Dashboard", layout="wide")
+# --------------------------
+# Streamlit page setup
+# --------------------------
+st.set_page_config(page_title="ESP + Weather Dashboard", layout="wide")
 
-# --- CSS (dark theme) ---
-st.markdown("""
-<style>
-body {background: radial-gradient(circle at 20% 20%, #1e1e2f, #111); color: #fff;}
-.weather-box {
-    background: linear-gradient(135deg, rgba(40,40,60,0.9), rgba(20,20,30,0.9));
-    border-radius: 20px;
-    padding: 1.5rem;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-    text-align: center;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-.weather-box:hover {transform: scale(1.02); box-shadow: 0 8px 30px rgba(0,0,0,0.6);}
-.emoji {font-size: 2.2rem; display: block; margin-bottom: 0.4rem;}
-.small-muted {color: #bfc9d9; font-size: 12px;}
-</style>
-""", unsafe_allow_html=True)
+# Custom CSS
+st.markdown(
+    """
+    <style>
+    body {
+        background: radial-gradient(circle at 20% 20%, #1e1e2f, #111);
+        color: #fff;
+    }
+    .main {
+        background-color: transparent;
+        color: #fff;
+    }
+    h1, h2, h3, h4, h5 {
+        color: #f8f8f8 !important;
+    }
+    .weather-box, .ow-box {
+        background: linear-gradient(135deg, rgba(40,40,60,0.9), rgba(20,20,30,0.9));
+        border-radius: 20px;
+        padding: 1.5rem;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .weather-box:hover, .ow-box:hover {
+        transform: scale(1.03);
+        box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+    }
+    .emoji {
+        font-size: 2.5rem;
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+    footer {
+        text-align: center;
+        margin-top: 2rem;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
-st.title("🌡️ ESP Weather Dashboard")
+st.title("🌦️ ESP Weather Dashboard")
 
-# ensure session state for selected node
-if "selected_node" not in st.session_state:
-    st.session_state.selected_node = "None"
+# --------------------------
+# City selection for OpenWeather
+# --------------------------
+city = st.text_input("🌍 Enter city name:", "Ettimadai").strip()
 
-# sidebar selection (kept, with unique key)
-st.sidebar.markdown("## 📡 Node Controls")
-st.sidebar.write("Click a node's button to view history, or choose below.")
-# placeholder for active nodes; updated each loop
-active_nodes_placeholder = st.sidebar.empty()
-selected_from_sidebar = st.sidebar.selectbox("Select node (sidebar)", options=["None"], key="sidebar_select")
-
-# main placeholder for dynamic content
 placeholder = st.empty()
 
-POLL_INTERVAL = 5  # seconds
-
-# Use a simple refresh loop (keeps behaviour like before)
+# --------------------------
+# Main update loop
+# --------------------------
 while True:
-    try:
-        res = requests.get(f"{BACKEND_URL}/data", timeout=5)
-        data = res.json() if res.status_code == 200 else {}
+    with placeholder.container():
+        cols_top = st.columns([3, 2])
 
-        # update sidebar active nodes selectbox choices
-        node_ids_sorted = []
-        if data:
-            node_ids_sorted = [n for n, _ in sorted(data.items(), key=lambda x: int(x[0]))]
-        active_nodes_placeholder.write("Active Nodes: " + (", ".join(node_ids_sorted) if node_ids_sorted else "None"))
+        # ---- Left side: OpenWeather ----
+        with cols_top[0]:
+            try:
+                ow_url = f"{OPENWEATHER_API}?q={city}&appid={OPENWEATHER_KEY}&units=metric"
+                ow_resp = requests.get(ow_url)
+                if ow_resp.status_code == 200:
+                    ow_data = ow_resp.json()
+                    temp = ow_data["main"]["temp"]
+                    hum = ow_data["main"]["humidity"]
+                    wind = ow_data["wind"]["speed"]
+                    desc = ow_data["weather"][0]["description"].capitalize()
+                    icon = ow_data["weather"][0]["icon"]
 
-        # If user chose from sidebar selectbox, update session_state
-        if selected_from_sidebar != "None":
-            st.session_state.selected_node = selected_from_sidebar
+                    st.markdown(
+                        f"""
+                        <div class="ow-box">
+                            <h2>🌍 Weather in {city.title()}</h2>
+                            <img src="https://openweathermap.org/img/wn/{icon}@2x.png" width="80">
+                            <h1>{temp:.1f}°C</h1>
+                            <h3>{desc}</h3>
+                            <p>💧 Humidity: {hum}%</p>
+                            <p>🌬️ Wind: {wind} m/s</p>
+                        </div>
+                        """,
+                        unsafe_allow_html=True
+                    )
+                else:
+                    st.error("Failed to fetch OpenWeather data.")
+            except Exception as e:
+                st.error(f"Error fetching weather: {e}")
 
-        with placeholder.container():
-            st.subheader("Connected ESP Nodes")
+        # ---- Right side: Date and Time ----
+        with cols_top[1]:
+            now = datetime.now()
+            current_time = now.strftime("%I:%M %p")
+            current_date = now.strftime("%A, %d %B %Y")
+
+            st.markdown(
+                f"""
+                <div class="ow-box">
+                    <h2>🕒 {current_time}</h2>
+                    <h3>{current_date}</h3>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+
+        # ---- ESP Nodes Section ----
+        st.subheader("Connected ESP Nodes")
+        try:
+            response = requests.get(BACKEND_URL)
+            data = response.json() if response.status_code == 200 else {}
 
             if not data:
                 st.info("Waiting for ESP nodes to send data...")
             else:
-                # Sort nodes numerically
                 sorted_nodes = sorted(data.items(), key=lambda x: int(x[0]))
+                cols = st.columns(len(sorted_nodes))
+                for i, (node_id, node_data) in enumerate(sorted_nodes):
+                    temp = node_data["temperature"]
+                    hum = node_data["humidity"]
+                    timestamp = node_data.get("timestamp", "N/A")
 
-                # create columns, but limit max columns per row to keep layout tidy
-                max_cols = 4
-                # chunk nodes into rows of max_cols
-                rows = [sorted_nodes[i:i+max_cols] for i in range(0, len(sorted_nodes), max_cols)]
-
-                for row in rows:
-                    cols = st.columns(len(row))
-                    for col, (node_id, node_data) in zip(cols, row):
-                        temp = node_data["temperature"]
-                        hum = node_data["humidity"]
-
-                        # Weather emoji logic
-                        if temp > 30:
-                            emoji = "☀️"
-                        elif temp > 20:
-                            emoji = "⛅"
-                        elif temp > 10:
-                            emoji = "🌧️"
-                        else:
-                            emoji = "❄️"
-                        if hum > 80:
-                            emoji += " 💧"
-                        elif hum < 30:
-                            emoji += " 🔥"
-
-                        # Unique button key per node (prefixed)
-                        btn_key = f"btn_{node_id}"
-
-                        with col:
-                            # show node card
-                            st.markdown(f"""
-                                <div class="weather-box">
-                                    <span class="emoji">{emoji}</span>
-                                    <h3>Node {node_id}</h3>
-                                    <h4>{temp:.1f}°C</h4>
-                                    <p>💧 {hum:.1f}% Humidity</p>
-                                    <div class="small-muted">Last: {node_data.get('timestamp','-')}</div>
-                                </div>
-                                """, unsafe_allow_html=True)
-
-                            # button to view node history. unique key ensures no duplicate-key error.
-                            if st.button(f"View Node {node_id}", key=btn_key):
-                                st.session_state.selected_node = node_id
-                                # optional: scroll to charts area by re-rendering (Streamlit will re-run)
-                                # we set selected_node and break to allow charts to show on same run.
-                                # break
-
-            # Show history charts for selected node (if any)
-            sel = st.session_state.selected_node
-            if sel != "None":
-                st.markdown(f"### 📊 Node {sel} - Historical Data")
-                hist_res = requests.get(f"{BACKEND_URL}/history/{sel}")
-                if hist_res.status_code == 200 and hist_res.json():
-                    df = pd.DataFrame(hist_res.json())
-                    if not df.empty:
-                        df["time"] = pd.to_datetime(df["time"])
-                        df = df.sort_values("time")
-                        col1, col2 = st.columns(2)
-                        with col1:
-                            st.line_chart(df.set_index("time")["temperature"])
-                        with col2:
-                            st.line_chart(df.set_index("time")["humidity"])
+                    # Icons
+                    if temp > 30:
+                        emoji = "☀️"
+                    elif temp > 20:
+                        emoji = "⛅"
+                    elif temp > 10:
+                        emoji = "🌧️"
                     else:
-                        st.info("No historical data yet for this node.")
-                else:
-                    st.info("No historical data yet for this node.")
+                        emoji = "❄️"
+                    if hum > 80:
+                        emoji += " 💧"
+                    elif hum < 30:
+                        emoji += " 🔥"
 
-        # sleep before next poll
-        time.sleep(POLL_INTERVAL)
+                    with cols[i]:
+                        st.markdown(
+                            f"""
+                            <div class="weather-box">
+                                <span class="emoji">{emoji}</span>
+                                <h3>Node {node_id}</h3>
+                                <h4>{temp:.1f}°C</h4>
+                                <p>💧 {hum:.1f}% Humidity</p>
+                                <small>Last update:<br>{timestamp}</small>
+                            </div>
+                            """,
+                            unsafe_allow_html=True
+                        )
+        except Exception as e:
+            st.error(f"Error fetching ESP data: {e}")
 
-    except requests.exceptions.RequestException as exc:
-        # network/backend error
-        placeholder.error(f"Error fetching data: {exc}")
-        time.sleep(POLL_INTERVAL)
-    except Exception as e:
-        placeholder.error(f"Unexpected error: {e}")
-        time.sleep(POLL_INTERVAL)
+        # ---- Footer with GitHub icon + hover effect ----
+        st.markdown(
+            """
+            <footer style="text-align:center; margin-top:2rem;">
+                <a href="https://github.com/praveenraj-rs/esp-weather-dashboard"
+                target="_blank"
+                style="text-decoration:none; display:inline-flex; align-items:center; gap:8px;
+                        color:#ccc; font-weight:500; transition:color 0.3s ease;">
+                    <svg xmlns="http://www.w3.org/2000/svg" 
+                        width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 .5C5.65.5.5 5.65.5 12a11.5 11.5 0 007.87 10.93c.58.1.79-.25.79-.55v-1.93
+                        c-3.2.7-3.88-1.54-3.88-1.54-.53-1.34-1.3-1.7-1.3-1.7-1.06-.72.08-.7.08-.7
+                        1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.73 1.26 3.4.97.1-.76.4-1.27.73-1.56
+                        -2.55-.29-5.23-1.28-5.23-5.67 0-1.25.44-2.27 1.17-3.07-.12-.29-.51-1.46.11-3.05
+                        0 0 .96-.31 3.15 1.17a10.9 10.9 0 015.73 0c2.18-1.48 3.14-1.17 3.14-1.17
+                        .62 1.59.23 2.76.11 3.05.73.8 1.16 1.82 1.16 3.07 0 4.4-2.69 5.37-5.25 5.65
+                        .41.35.78 1.03.78 2.08v3.09c0 .3.2.66.8.55A11.5 11.5 0 0023.5 12C23.5 5.65
+                        18.35.5 12 .5z"/>
+                    </svg>
+                    <span>View this project on GitHub</span>
+                </a>
+                <style>
+                    footer a:hover {
+                        color: #58a6ff !important;
+                        transform: scale(1.05);
+                    }
+                    footer svg {
+                        transition: transform 0.3s ease, color 0.3s ease;
+                    }
+                    footer a:hover svg {
+                        transform: rotate(10deg) scale(1.2);
+                        color: #58a6ff;
+                    }
+                </style>
+            </footer>
+            """,
+            unsafe_allow_html=True
+        )
+
+
+    time.sleep(5)
