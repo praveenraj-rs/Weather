@@ -1,0 +1,72 @@
+digraph ESP_Weather_Dashboard {
+    rankdir=LR;
+    splines=ortho;
+    node [shape=rectangle, style="rounded,filled", fillcolor="#3a3f5a", fontcolor="white", fontsize=11];
+    edge [color="#aaaaaa", arrowsize=0.9, penwidth=1.4];
+
+    subgraph cluster_firmware {
+        label="Firmware Layer (ESP Nodes)";
+        color="#5c6bc0";
+        style="rounded";
+        fontcolor="white";
+        fontsize=12;
+
+        ESP32_Node [label="ESP32 Node\n(DHT Sensor)", fillcolor="#3949ab"];
+        ESP8266_Node [label="ESP8266 Node\n(DHT Sensor)", fillcolor="#3949ab"];
+        Sensors [label="Temperature / Humidity", fillcolor="#6c63ff"];
+        
+        Sensors -> ESP32_Node [xlabel="Analog Read"];
+        Sensors -> ESP8266_Node [xlabel="Analog Read"];
+    }
+
+    subgraph cluster_backend {
+        label="Backend Layer (FastAPI)";
+        color="#43a047";
+        style="rounded";
+        fontcolor="white";
+        fontsize=12;
+
+        FastAPI_Server [label="FastAPI Server\n(backend.py)", fillcolor="#2e7d32"];
+        Data_Handler [label="Data Handler\n(update_data.py)", fillcolor="#388e3c"];
+        JSON_Storage [label="In-memory / CSV Store", fillcolor="#4caf50"];
+    }
+
+    subgraph cluster_frontend {
+        label="Frontend Layer (Streamlit)";
+        color="#0277bd";
+        style="rounded";
+        fontcolor="white";
+        fontsize=12;
+
+        Streamlit_UI [label="Streamlit Dashboard\n(frontend.py)", fillcolor="#0288d1"];
+        Metrics_Display [label="Live Node Cards\n(Temp / Humidity)", fillcolor="#03a9f4"];
+        Weather_API [label="OpenWeatherMap API\n(External)", fillcolor="#81d4fa"];
+    }
+
+    subgraph cluster_user {
+        label="User Layer";
+        color="#8e24aa";
+        style="rounded";
+        fontcolor="white";
+        fontsize=12;
+
+        User [label="User\n(Views Dashboard)", shape=oval, fillcolor="#ab47bc"];
+    }
+
+    # Firmware → Backend
+    ESP32_Node -> FastAPI_Server [xlabel="POST JSON Data"];
+    ESP8266_Node -> FastAPI_Server [xlabel="POST JSON Data"];
+    FastAPI_Server -> Data_Handler [xlabel="Validate & Parse"];
+    Data_Handler -> JSON_Storage [xlabel="Save / Update"];
+
+    # Backend → Frontend
+    JSON_Storage -> Streamlit_UI [xlabel="GET /data"];
+    Streamlit_UI -> Metrics_Display [xlabel="Render Metrics"];
+
+    # Frontend ↔ Weather API
+    Streamlit_UI -> Weather_API [xlabel="Fetch City Weather"];
+    Weather_API -> Streamlit_UI [xlabel="JSON Response"];
+
+    # Frontend → User
+    Metrics_Display -> User [xlabel="Interactive Dashboard View"];
+}

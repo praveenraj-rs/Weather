@@ -1,0 +1,122 @@
+\chapter{ESP Weather Dashboard}
+\hypertarget{index}{}\label{index}\index{ESP Weather Dashboard@{ESP Weather Dashboard}}
+\DoxyHorRuler{0}
+\hypertarget{index_architecture}{}\doxysection{\texorpdfstring{System Architecture}{System Architecture}}\label{index_architecture}
+The following diagram illustrates the overall data flow between firmware, backend, and frontend\+:
+
+
+\begin{DoxyImageNoCaption}
+  \mbox{\includegraphics[width=\textwidth,height=\textheight/2,keepaspectratio=true]{dot_inline_dotgraph_1}}
+\end{DoxyImageNoCaption}
+\hypertarget{index_overview}{}\doxysection{\texorpdfstring{Project Overview}{Project Overview}}\label{index_overview}
+{\bfseries{ESP Weather Dashboard}} is a modern IoT monitoring system built using\+:
+
+
+\begin{DoxyItemize}
+\item {\bfseries{Streamlit (Frontend)}} — for real-\/time data visualization
+\item {\bfseries{Fast\+API (Backend)}} — for data collection and REST API services
+\item {\bfseries{ESP32 / ESP8266 Nodes}} — for temperature and humidity sensing
+\end{DoxyItemize}
+
+Each ESP node periodically sends JSON data to the Fast\+API server. ~\newline
+ The Streamlit dashboard then displays these values live in an elegant {\bfseries{dark, weather-\/themed interface}}.
+
+\DoxyHorRuler{0}
+\hypertarget{index_tech}{}\doxysection{\texorpdfstring{Tech Stack}{Tech Stack}}\label{index_tech}
+
+\begin{DoxyItemize}
+\item {\bfseries{Firmware\+:}} ESP32 / ESP8266 (Arduino)
+\item {\bfseries{Backend\+:}} Fast\+API (Python)
+\item {\bfseries{Frontend\+:}} Streamlit (Python)
+\item {\bfseries{Libraries\+:}} Requests, Pandas
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{index_setup}{}\doxysection{\texorpdfstring{Setup Instructions}{Setup Instructions}}\label{index_setup}
+{\bfseries{1️⃣ Clone the Repository}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{git\ clone\ https://github.com/praveenraj-\/rs/Weather.git}
+\DoxyCodeLine{cd\ esp-\/weather-\/dashboard}
+
+\end{DoxyCode}
+
+
+{\bfseries{2️⃣ Install Dependencies}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{pip\ install\ -\/r\ requirements.txt}
+
+\end{DoxyCode}
+ \+\_\+(Requires Python 3.\+9 or newer)\+\_\+
+
+{\bfseries{3️⃣ Run the Backend (Fast\+API)}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{python3\ Backend/backend.py}
+
+\end{DoxyCode}
+
+
+{\bfseries{4️⃣ Run the Frontend (Streamlit)}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{streamlit\ run\ Frontend/frontend.py\ -\/-\/server.port\ 8501}
+
+\end{DoxyCode}
+
+
+{\bfseries{5️⃣ Test Data Upload (via c\+URL)}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{curl\ -\/X\ POST\ http://localhost:8000/update\ \(\backslash\)}
+\DoxyCodeLine{-\/H\ "{}Content-\/Type:\ application/json"{}\ \(\backslash\)}
+\DoxyCodeLine{-\/d\ '\{"{}node\_id"{}:"{}1"{},"{}temperature"{}:26.5,"{}humidity"{}:60.2\}'}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{index_features}{}\doxysection{\texorpdfstring{Features}{Features}}\label{index_features}
+Real-\/time temperature \& humidity monitoring ~\newline
+ Auto-\/refresh every few seconds ~\newline
+ Interactive weather-\/themed dark UI ~\newline
+ Supports multiple ESP nodes ~\newline
+ Node sorting \& data visualization ~\newline
+ Fully compatible with ESP32 and ESP8266 boards
+
+\DoxyHorRuler{0}
+\hypertarget{index_structure}{}\doxysection{\texorpdfstring{Directory Structure}{Directory Structure}}\label{index_structure}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{├──\ Backend}
+\DoxyCodeLine{│\ ├──\ backend.py}
+\DoxyCodeLine{│\ ├──\ backend\_update.py}
+\DoxyCodeLine{│\ ├──\ get\_data.py}
+\DoxyCodeLine{│\ └──\ update\_data.py}
+\DoxyCodeLine{├──\ Frontend}
+\DoxyCodeLine{│\ ├──\ frontend.py}
+\DoxyCodeLine{│\ ├──\ frontend.sh}
+\DoxyCodeLine{│\ └──\ frontend\_update.py}
+\DoxyCodeLine{├──\ Firmware}
+\DoxyCodeLine{│\ ├──\ ESP32\_Node}
+\DoxyCodeLine{│\ │\ └──\ ESP32\_Node.ino}
+\DoxyCodeLine{│\ └──\ ESP8266\_Node}
+\DoxyCodeLine{│\ └──\ ESP8266\_Node.ino}
+\DoxyCodeLine{├──\ Documents}
+\DoxyCodeLine{└──\ README.md}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{index_firmware}{}\doxysection{\texorpdfstring{Example ESP Firmware Snippet}{Example ESP Firmware Snippet}}\label{index_firmware}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{String\ jsonData\ =\ \textcolor{stringliteral}{"{}\{\(\backslash\)"{}node\_id\(\backslash\)"{}:\ \(\backslash\)"{}1\(\backslash\)"{},\ \(\backslash\)"{}temperature\(\backslash\)"{}:\ 25.6,\ \(\backslash\)"{}humidity\(\backslash\)"{}:\ 61.2\}"{}};}
+\DoxyCodeLine{http.begin(\textcolor{stringliteral}{"{}http://<server\_ip>:8000/update"{}});}
+\DoxyCodeLine{http.addHeader(\textcolor{stringliteral}{"{}Content-\/Type"{}},\ \textcolor{stringliteral}{"{}application/json"{}});}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ code\ =\ http.POST(jsonData);}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+
+
+Git\+Hub\+: \href{https://github.com/praveenraj-rs/Weather.git}{\texttt{ https\+://github.\+com/praveenraj-\/rs/\+Weather.\+git}} 

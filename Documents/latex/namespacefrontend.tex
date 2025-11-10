@@ -1,0 +1,276 @@
+\doxysection{frontend Namespace Reference}
+\hypertarget{namespacefrontend}{}\label{namespacefrontend}\index{frontend@{frontend}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacefrontend_a690c5602dc3641f73d0e8631e67c42eb}{fetch\+\_\+backend\+\_\+data}} ()
+\begin{DoxyCompactList}\small\item\em Fetch JSON weather data from the backend API. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacefrontend_a1207e84235d192dcefc423b7e0480200}{get\+\_\+weather\+\_\+emoji}} (temp, hum)
+\begin{DoxyCompactList}\small\item\em Determine a weather emoji based on temperature and humidity. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacefrontend_a76473c6c197c876324063da8074ff1ea}{render\+\_\+dashboard}} (\mbox{\hyperlink{namespacefrontend_a99c03e7834eb7b359fa8378cffc0c5e7}{data}})
+\begin{DoxyCompactList}\small\item\em Render weather cards for all connected ESP nodes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{namespacefrontend_a93a188c1fb2d93dcf7d4743344bd7ff3}{BACKEND\+\_\+\+URL}} = "{}http\+://localhost\+:8000/data"{}
+\begin{DoxyCompactList}\small\item\em URL endpoint of the backend API. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacefrontend_a6611c317b10a0f402c244f49576d3ca4}{page\+\_\+title}}
+\begin{DoxyCompactList}\small\item\em Configure Streamlit page layout and appearance. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacefrontend_aaa106e88b5e7ce7e1a23f407c4541ab9}{layout}}
+\item 
+\mbox{\hyperlink{namespacefrontend_a4c3d076d449f8c3199686f78fd9c17ed}{unsafe\+\_\+allow\+\_\+html}}
+\begin{DoxyCompactList}\small\item\em Custom dark theme CSS for dashboard styling. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacefrontend_ad2199c479862cd998d7b73e71a0da5d6}{placeholder}} = st.\+empty()
+\begin{DoxyCompactList}\small\item\em Main dashboard title. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacefrontend_a99c03e7834eb7b359fa8378cffc0c5e7}{data}} = \mbox{\hyperlink{namespacefrontend_a690c5602dc3641f73d0e8631e67c42eb}{fetch\+\_\+backend\+\_\+data}}()
+\begin{DoxyCompactList}\small\item\em Continuously update the dashboard every 5 seconds with backend data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacefrontend_a690c5602dc3641f73d0e8631e67c42eb}\label{namespacefrontend_a690c5602dc3641f73d0e8631e67c42eb} 
+\index{frontend@{frontend}!fetch\_backend\_data@{fetch\_backend\_data}}
+\index{fetch\_backend\_data@{fetch\_backend\_data}!frontend@{frontend}}
+\doxysubsubsection{\texorpdfstring{fetch\_backend\_data()}{fetch\_backend\_data()}}
+{\footnotesize\ttfamily frontend.\+fetch\+\_\+backend\+\_\+data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Fetch JSON weather data from the backend API. 
+
+\begin{DoxyReturn}{Returns}
+dict\+: Parsed JSON data from the server if successful, otherwise empty dictionary. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{frontend_8py_source_l00085}{85}} of file \mbox{\hyperlink{frontend_8py_source}{frontend.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00085\ \textcolor{keyword}{def\ }fetch\_backend\_data():}
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{00087\ \textcolor{stringliteral}{\ \ \ \ @brief\ Fetch\ JSON\ weather\ data\ from\ the\ backend\ API.}}
+\DoxyCodeLine{00088\ \textcolor{stringliteral}{\ \ \ \ @return\ dict:\ Parsed\ JSON\ data\ from\ the\ server\ if\ successful,\ otherwise\ empty\ dictionary.}}
+\DoxyCodeLine{00089\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordflow}{try}:}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ response\ =\ requests.get(BACKEND\_URL)}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ response.status\_code\ ==\ 200:}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ response.json()}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\}}
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keywordflow}{except}\ Exception\ \textcolor{keyword}{as}\ e:}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ st.error(f\textcolor{stringliteral}{"{}Error\ fetching\ data:\ \{e\}"{}})}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\}}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ }
+
+\end{DoxyCode}
+\Hypertarget{namespacefrontend_a1207e84235d192dcefc423b7e0480200}\label{namespacefrontend_a1207e84235d192dcefc423b7e0480200} 
+\index{frontend@{frontend}!get\_weather\_emoji@{get\_weather\_emoji}}
+\index{get\_weather\_emoji@{get\_weather\_emoji}!frontend@{frontend}}
+\doxysubsubsection{\texorpdfstring{get\_weather\_emoji()}{get\_weather\_emoji()}}
+{\footnotesize\ttfamily frontend.\+get\+\_\+weather\+\_\+emoji (\begin{DoxyParamCaption}\item[{}]{temp,  }\item[{}]{hum }\end{DoxyParamCaption})}
+
+
+
+Determine a weather emoji based on temperature and humidity. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em temp} & Temperature in Celsius. \\
+\hline
+{\em hum} & Humidity in percentage. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+str\+: Emoji string representing the current weather condition. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{frontend_8py_source_l00100}{100}} of file \mbox{\hyperlink{frontend_8py_source}{frontend.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00100\ \textcolor{keyword}{def\ }get\_weather\_emoji(temp,\ hum):}
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{00102\ \textcolor{stringliteral}{\ \ \ \ @brief\ Determine\ a\ weather\ emoji\ based\ on\ temperature\ and\ humidity.}}
+\DoxyCodeLine{00103\ \textcolor{stringliteral}{\ \ \ \ @param\ temp\ Temperature\ in\ Celsius.}}
+\DoxyCodeLine{00104\ \textcolor{stringliteral}{\ \ \ \ @param\ hum\ Humidity\ in\ percentage.}}
+\DoxyCodeLine{00105\ \textcolor{stringliteral}{\ \ \ \ @return\ str:\ Emoji\ string\ representing\ the\ current\ weather\ condition.}}
+\DoxyCodeLine{00106\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keywordflow}{if}\ temp\ >\ 30:}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ emoji\ =\ \textcolor{stringliteral}{"{}☀️"{}}}
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keywordflow}{elif}\ temp\ >\ 20:}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ emoji\ =\ \textcolor{stringliteral}{"{}⛅"{}}}
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keywordflow}{elif}\ temp\ >\ 10:}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ emoji\ =\ \textcolor{stringliteral}{"{}🌧️"{}}}
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ emoji\ =\ \textcolor{stringliteral}{"{}❄️"{}}}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00116\ \ \ \ \ \textcolor{keywordflow}{if}\ hum\ >\ 80:}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ emoji\ +=\ \textcolor{stringliteral}{"{}\ 💧"{}}}
+\DoxyCodeLine{00118\ \ \ \ \ \textcolor{keywordflow}{elif}\ hum\ <\ 30:}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ emoji\ +=\ \textcolor{stringliteral}{"{}\ 🔥"{}}}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keywordflow}{return}\ emoji}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00123\ }
+
+\end{DoxyCode}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacefrontend_a1207e84235d192dcefc423b7e0480200_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacefrontend_a76473c6c197c876324063da8074ff1ea}\label{namespacefrontend_a76473c6c197c876324063da8074ff1ea} 
+\index{frontend@{frontend}!render\_dashboard@{render\_dashboard}}
+\index{render\_dashboard@{render\_dashboard}!frontend@{frontend}}
+\doxysubsubsection{\texorpdfstring{render\_dashboard()}{render\_dashboard()}}
+{\footnotesize\ttfamily frontend.\+render\+\_\+dashboard (\begin{DoxyParamCaption}\item[{}]{data }\end{DoxyParamCaption})}
+
+
+
+Render weather cards for all connected ESP nodes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & Dictionary containing node data with temperature, humidity, and timestamp. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{frontend_8py_source_l00124}{124}} of file \mbox{\hyperlink{frontend_8py_source}{frontend.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00124\ \textcolor{keyword}{def\ }render\_dashboard(data):}
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{00126\ \textcolor{stringliteral}{\ \ \ \ @brief\ Render\ weather\ cards\ for\ all\ connected\ ESP\ nodes.}}
+\DoxyCodeLine{00127\ \textcolor{stringliteral}{\ \ \ \ @param\ data\ Dictionary\ containing\ node\ data\ with\ temperature,\ humidity,\ and\ timestamp.}}
+\DoxyCodeLine{00128\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00129\ \ \ \ \ \textcolor{keyword}{with}\ placeholder.container():}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ st.subheader(\textcolor{stringliteral}{"{}Connected\ ESP\ Nodes"{}})}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ data:}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \ \ \ \ st.info(\textcolor{stringliteral}{"{}Waiting\ for\ ESP\ nodes\ to\ send\ data..."{}})}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Sort\ node\ IDs\ numerically}}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ sorted\_nodes\ =\ sorted(data.items(),\ key=\textcolor{keyword}{lambda}\ x:\ int(x[0]))}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ cols\ =\ st.columns(len(sorted\_nodes))}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ i,\ (node\_id,\ node\_data)\ \textcolor{keywordflow}{in}\ enumerate(sorted\_nodes):}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \ \ \ \ temp\ =\ node\_data[\textcolor{stringliteral}{"{}temperature"{}}]}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \ \ \ \ hum\ =\ node\_data[\textcolor{stringliteral}{"{}humidity"{}}]}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \ \ \ \ emoji\ =\ get\_weather\_emoji(temp,\ hum)}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{with}\ cols[i]:}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ st.markdown(}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{00148\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <div\ class="{}weather-\/box"{}>}}
+\DoxyCodeLine{00149\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <span\ class="{}emoji"{}>\{emoji\}</span>}}
+\DoxyCodeLine{00150\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <h3>Node\ \{node\_id\}</h3>}}
+\DoxyCodeLine{00151\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <h4>\{temp:.1f\}°C</h4>}}
+\DoxyCodeLine{00152\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <p>💧\ \{hum:.1f\}\%\ Humidity</p>}}
+\DoxyCodeLine{00153\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <small>Last\ update:<br>\{node\_data['timestamp']\}</small>}}
+\DoxyCodeLine{00154\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ </div>}}
+\DoxyCodeLine{00155\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}"{}"{}},}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ unsafe\_allow\_html=\textcolor{keyword}{True}}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00159\ }
+\DoxyCodeLine{00160\ \textcolor{comment}{\#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00161\ \textcolor{comment}{\#\ Main\ Execution\ Loop}}
+\DoxyCodeLine{00162\ \textcolor{comment}{\#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+
+\end{DoxyCode}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacefrontend_a76473c6c197c876324063da8074ff1ea_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespacefrontend_a93a188c1fb2d93dcf7d4743344bd7ff3}\label{namespacefrontend_a93a188c1fb2d93dcf7d4743344bd7ff3} 
+\index{frontend@{frontend}!BACKEND\_URL@{BACKEND\_URL}}
+\index{BACKEND\_URL@{BACKEND\_URL}!frontend@{frontend}}
+\doxysubsubsection{\texorpdfstring{BACKEND\_URL}{BACKEND\_URL}}
+{\footnotesize\ttfamily str frontend.\+BACKEND\+\_\+\+URL = "{}http\+://localhost\+:8000/data"{}}
+
+
+
+URL endpoint of the backend API. 
+
+The frontend fetches JSON data periodically from this URL. 
+
+Definition at line \mbox{\hyperlink{frontend_8py_source_l00026}{26}} of file \mbox{\hyperlink{frontend_8py_source}{frontend.\+py}}.
+
+\Hypertarget{namespacefrontend_a99c03e7834eb7b359fa8378cffc0c5e7}\label{namespacefrontend_a99c03e7834eb7b359fa8378cffc0c5e7} 
+\index{frontend@{frontend}!data@{data}}
+\index{data@{data}!frontend@{frontend}}
+\doxysubsubsection{\texorpdfstring{data}{data}}
+{\footnotesize\ttfamily frontend.\+data = \mbox{\hyperlink{namespacefrontend_a690c5602dc3641f73d0e8631e67c42eb}{fetch\+\_\+backend\+\_\+data}}()}
+
+
+
+Continuously update the dashboard every 5 seconds with backend data. 
+
+
+
+Definition at line \mbox{\hyperlink{frontend_8py_source_l00165}{165}} of file \mbox{\hyperlink{frontend_8py_source}{frontend.\+py}}.
+
+\Hypertarget{namespacefrontend_aaa106e88b5e7ce7e1a23f407c4541ab9}\label{namespacefrontend_aaa106e88b5e7ce7e1a23f407c4541ab9} 
+\index{frontend@{frontend}!layout@{layout}}
+\index{layout@{layout}!frontend@{frontend}}
+\doxysubsubsection{\texorpdfstring{layout}{layout}}
+{\footnotesize\ttfamily frontend.\+layout}
+
+
+
+Definition at line \mbox{\hyperlink{frontend_8py_source_l00033}{33}} of file \mbox{\hyperlink{frontend_8py_source}{frontend.\+py}}.
+
+\Hypertarget{namespacefrontend_a6611c317b10a0f402c244f49576d3ca4}\label{namespacefrontend_a6611c317b10a0f402c244f49576d3ca4} 
+\index{frontend@{frontend}!page\_title@{page\_title}}
+\index{page\_title@{page\_title}!frontend@{frontend}}
+\doxysubsubsection{\texorpdfstring{page\_title}{page\_title}}
+{\footnotesize\ttfamily frontend.\+page\+\_\+title}
+
+
+
+Configure Streamlit page layout and appearance. 
+
+
+
+Definition at line \mbox{\hyperlink{frontend_8py_source_l00033}{33}} of file \mbox{\hyperlink{frontend_8py_source}{frontend.\+py}}.
+
+\Hypertarget{namespacefrontend_ad2199c479862cd998d7b73e71a0da5d6}\label{namespacefrontend_ad2199c479862cd998d7b73e71a0da5d6} 
+\index{frontend@{frontend}!placeholder@{placeholder}}
+\index{placeholder@{placeholder}!frontend@{frontend}}
+\doxysubsubsection{\texorpdfstring{placeholder}{placeholder}}
+{\footnotesize\ttfamily frontend.\+placeholder = st.\+empty()}
+
+
+
+Main dashboard title. 
+
+Placeholder for dynamic dashboard updates. 
+
+Definition at line \mbox{\hyperlink{frontend_8py_source_l00079}{79}} of file \mbox{\hyperlink{frontend_8py_source}{frontend.\+py}}.
+
+\Hypertarget{namespacefrontend_a4c3d076d449f8c3199686f78fd9c17ed}\label{namespacefrontend_a4c3d076d449f8c3199686f78fd9c17ed} 
+\index{frontend@{frontend}!unsafe\_allow\_html@{unsafe\_allow\_html}}
+\index{unsafe\_allow\_html@{unsafe\_allow\_html}!frontend@{frontend}}
+\doxysubsubsection{\texorpdfstring{unsafe\_allow\_html}{unsafe\_allow\_html}}
+{\footnotesize\ttfamily frontend.\+unsafe\+\_\+allow\+\_\+html}
+
+
+
+Custom dark theme CSS for dashboard styling. 
+
+
+
+Definition at line \mbox{\hyperlink{frontend_8py_source_l00072}{72}} of file \mbox{\hyperlink{frontend_8py_source}{frontend.\+py}}.
+

@@ -1,0 +1,5 @@
+<map id="frontend.render_dashboard" name="frontend.render_dashboard">
+<area shape="rect" id="Node000001" title="Render weather cards for all connected ESP nodes." alt="" coords="5,13,204,38"/>
+<area shape="rect" id="Node000002" href="$namespacefrontend.html#a1207e84235d192dcefc423b7e0480200" title="Determine a weather emoji based on temperature and humidity." alt="" coords="252,5,415,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="204,23,238,23,238,28,204,28"/>
+</map>

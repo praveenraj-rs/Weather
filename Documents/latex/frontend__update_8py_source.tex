@@ -1,0 +1,269 @@
+\doxysection{frontend\+\_\+update.\+py}
+\hypertarget{frontend__update_8py_source}{}\label{frontend__update_8py_source}\index{Frontend/frontend\_update.py@{Frontend/frontend\_update.py}}
+\mbox{\hyperlink{frontend__update_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00001}\mbox{\hyperlink{namespacefrontend__update}{00001}}\ }
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00021}00021\ \textcolor{keyword}{import}\ streamlit\ \textcolor{keyword}{as}\ st}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00022}00022\ \textcolor{keyword}{import}\ requests}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00023}00023\ \textcolor{keyword}{import}\ time}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00024}00024\ \textcolor{keyword}{from}\ datetime\ \textcolor{keyword}{import}\ datetime}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00026}00026\ \textcolor{comment}{\#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00027}00027\ \textcolor{comment}{\#\ Configuration}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00028}00028\ \textcolor{comment}{\#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00031}\mbox{\hyperlink{namespacefrontend__update_a776cd2c9f35e2ea0f1435d21b1db4cc9}{00031}}\ BACKEND\_URL\ =\ \textcolor{stringliteral}{"{}http://localhost:8000/data"{}}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00034}\mbox{\hyperlink{namespacefrontend__update_acf4fce23114c30f90de9e72c4f6a4553}{00034}}\ OPENWEATHER\_API\ =\ \textcolor{stringliteral}{"{}https://openweathermap.org/data/2.5/weather"{}}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00038}\mbox{\hyperlink{namespacefrontend__update_a5d00a1fb26219c67f923ee1b6739f83d}{00038}}\ OPENWEATHER\_KEY\ =\ \textcolor{stringliteral}{"{}439d4b804bc8187953eb36d2a8c26a02"{}}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00041}00041\ \textcolor{comment}{\#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00042}00042\ \textcolor{comment}{\#\ Streamlit\ page\ setup}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00043}00043\ \textcolor{comment}{\#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00045}\mbox{\hyperlink{namespacefrontend__update_abc82edf35fc263707c1a115558628e32}{00045}}\ st.set\_page\_config(page\_title=\textcolor{stringliteral}{"{}ESP\ +\ Weather\ Dashboard"{}},\ layout=\textcolor{stringliteral}{"{}wide"{}})}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00048}00048\ st.markdown(}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00049}00049\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00050}00050\ \textcolor{stringliteral}{\ \ \ \ <style>}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00051}00051\ \textcolor{stringliteral}{\ \ \ \ body\ \{}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00052}00052\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ background:\ radial-\/gradient(circle\ at\ 20\%\ 20\%,\ \#1e1e2f,\ \#111);}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00053}00053\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ color:\ \#fff;}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00054}00054\ \textcolor{stringliteral}{\ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00055}00055\ \textcolor{stringliteral}{\ \ \ \ .main\ \{}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00056}00056\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ background-\/color:\ transparent;}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00057}00057\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ color:\ \#fff;}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00058}00058\ \textcolor{stringliteral}{\ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00059}00059\ \textcolor{stringliteral}{\ \ \ \ h1,\ h2,\ h3,\ h4,\ h5\ \{}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00060}00060\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ color:\ \#f8f8f8\ !important;}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00061}00061\ \textcolor{stringliteral}{\ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00062}00062\ \textcolor{stringliteral}{\ \ \ \ .weather-\/box,\ .ow-\/box\ \{}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00063}00063\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ background:\ linear-\/gradient(135deg,\ rgba(40,40,60,0.9),\ rgba(20,20,30,0.9));}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00064}00064\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border-\/radius:\ 20px;}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00065}00065\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ padding:\ 1.5rem;}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00066}00066\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ box-\/shadow:\ 0\ 4px\ 20px\ rgba(0,0,0,0.4);}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00067}00067\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ text-\/align:\ center;}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00068}00068\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ transition:\ transform\ 0.3s\ ease,\ box-\/shadow\ 0.3s\ ease;}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00069}00069\ \textcolor{stringliteral}{\ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00070}00070\ \textcolor{stringliteral}{\ \ \ \ .weather-\/box:hover,\ .ow-\/box:hover\ \{}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00071}00071\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ transform:\ scale(1.03);}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00072}00072\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ box-\/shadow:\ 0\ 8px\ 30px\ rgba(0,0,0,0.6);}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00073}00073\ \textcolor{stringliteral}{\ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00074}00074\ \textcolor{stringliteral}{\ \ \ \ .emoji\ \{}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00075}00075\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ font-\/size:\ 2.5rem;}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00076}00076\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ display:\ block;}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00077}00077\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ margin-\/bottom:\ 0.5rem;}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00078}00078\ \textcolor{stringliteral}{\ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00079}00079\ \textcolor{stringliteral}{\ \ \ \ footer\ \{}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00080}00080\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ text-\/align:\ center;}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00081}00081\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ margin-\/top:\ 2rem;}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00082}00082\ \textcolor{stringliteral}{\ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00083}00083\ \textcolor{stringliteral}{\ \ \ \ </style>}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00084}00084\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}},}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00085}\mbox{\hyperlink{namespacefrontend__update_aae303daff2ba22b8540f529e71c475cc}{00085}}\ \ \ \ \ unsafe\_allow\_html=\textcolor{keyword}{True}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00086}00086\ )}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00088}00088\ st.title(\textcolor{stringliteral}{"{}🌦️\ ESP\ Weather\ Dashboard"{}})}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00089}00089\ }
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00091}00091\ \textcolor{comment}{\#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00092}00092\ \textcolor{comment}{\#\ City\ input\ for\ OpenWeather}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00093}00093\ \textcolor{comment}{\#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00094}00094\ }
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00095}\mbox{\hyperlink{namespacefrontend__update_a3acb9fafb96b85c19919a7e7d84675d2}{00095}}\ city\ =\ st.text\_input(\textcolor{stringliteral}{"{}🌍\ Enter\ city\ name:"{}},\ \textcolor{stringliteral}{"{}Ettimadai"{}}).strip()}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00097}00097\ }
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00098}\mbox{\hyperlink{namespacefrontend__update_aab39ab7fd64debe58638ffa410fa51c2}{00098}}\ placeholder\ =\ st.empty()}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00099}00099\ }
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00100}00100\ }
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00101}00101\ \textcolor{comment}{\#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00102}00102\ \textcolor{comment}{\#\ Helper\ Functions}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00103}00103\ \textcolor{comment}{\#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00104}00104\ }
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00105}\mbox{\hyperlink{namespacefrontend__update_a97fd40664bc7cfb18d6d7759bb0f548b}{00105}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacefrontend__update_a97fd40664bc7cfb18d6d7759bb0f548b}{fetch\_openweather\_data}}(city):}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00106}00106\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00107}00107\ \textcolor{stringliteral}{\ \ \ \ @brief\ Fetch\ current\ weather\ data\ from\ OpenWeather\ API.}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00108}00108\ \textcolor{stringliteral}{\ \ \ \ @param\ city\ City\ name\ as\ string.}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00109}00109\ \textcolor{stringliteral}{\ \ \ \ @return\ dict:\ Parsed\ JSON\ response\ containing\ temperature,\ humidity,\ wind,\ and\ description.}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00110}00110\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00111}00111\ \ \ \ \ \textcolor{keywordflow}{try}:}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00112}00112\ \ \ \ \ \ \ \ \ ow\_url\ =\ f\textcolor{stringliteral}{"{}\{OPENWEATHER\_API\}?q=\{city\}\&appid=\{OPENWEATHER\_KEY\}\&units=metric"{}}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00113}00113\ \ \ \ \ \ \ \ \ response\ =\ requests.get(ow\_url)}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00114}00114\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ response.status\_code\ ==\ 200:}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ response.json()}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00116}00116\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ st.error(\textcolor{stringliteral}{"{}Failed\ to\ fetch\ OpenWeather\ data."{}})}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00118}00118\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00119}00119\ \ \ \ \ \textcolor{keywordflow}{except}\ Exception\ \textcolor{keyword}{as}\ e:}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00120}00120\ \ \ \ \ \ \ \ \ st.error(f\textcolor{stringliteral}{"{}Error\ fetching\ weather:\ \{e\}"{}})}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00121}00121\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00122}00122\ }
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00123}00123\ }
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00124}\mbox{\hyperlink{namespacefrontend__update_a1c85d744e929d9f1b2895250edf56c25}{00124}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacefrontend__update_a1c85d744e929d9f1b2895250edf56c25}{fetch\_esp\_data}}():}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00125}00125\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00126}00126\ \textcolor{stringliteral}{\ \ \ \ @brief\ Retrieve\ environmental\ data\ from\ backend\ ESP\ nodes.}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00127}00127\ \textcolor{stringliteral}{\ \ \ \ @return\ dict:\ Node-\/wise\ dictionary\ containing\ temperature,\ humidity,\ and\ timestamps.}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00128}00128\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00129}00129\ \ \ \ \ \textcolor{keywordflow}{try}:}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00130}00130\ \ \ \ \ \ \ \ \ response\ =\ requests.get(BACKEND\_URL)}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00131}00131\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ response.status\_code\ ==\ 200:}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00132}00132\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ response.json()}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00133}00133\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00134}00134\ \ \ \ \ \textcolor{keywordflow}{except}\ Exception\ \textcolor{keyword}{as}\ e:}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00135}00135\ \ \ \ \ \ \ \ \ st.error(f\textcolor{stringliteral}{"{}Error\ fetching\ ESP\ data:\ \{e\}"{}})}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00136}00136\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00137}00137\ }
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00138}00138\ }
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00139}\mbox{\hyperlink{namespacefrontend__update_a157e071b3a485a21b612f93d77fbd8c4}{00139}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacefrontend__update_a157e071b3a485a21b612f93d77fbd8c4}{get\_weather\_emoji}}(temp,\ hum):}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00140}00140\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00141}00141\ \textcolor{stringliteral}{\ \ \ \ @brief\ Determine\ weather\ emoji\ based\ on\ temperature\ and\ humidity.}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00142}00142\ \textcolor{stringliteral}{\ \ \ \ @param\ temp\ Temperature\ in\ °C.}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00143}00143\ \textcolor{stringliteral}{\ \ \ \ @param\ hum\ Humidity\ percentage.}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00144}00144\ \textcolor{stringliteral}{\ \ \ \ @return\ str:\ Unicode\ emoji\ string.}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00145}00145\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00146}00146\ \ \ \ \ \textcolor{keywordflow}{if}\ temp\ >\ 30:}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00147}00147\ \ \ \ \ \ \ \ \ emoji\ =\ \textcolor{stringliteral}{"{}☀️"{}}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00148}00148\ \ \ \ \ \textcolor{keywordflow}{elif}\ temp\ >\ 20:}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00149}00149\ \ \ \ \ \ \ \ \ emoji\ =\ \textcolor{stringliteral}{"{}⛅"{}}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00150}00150\ \ \ \ \ \textcolor{keywordflow}{elif}\ temp\ >\ 10:}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00151}00151\ \ \ \ \ \ \ \ \ emoji\ =\ \textcolor{stringliteral}{"{}🌧️"{}}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00152}00152\ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00153}00153\ \ \ \ \ \ \ \ \ emoji\ =\ \textcolor{stringliteral}{"{}❄️"{}}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00154}00154\ }
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00155}00155\ \ \ \ \ \textcolor{keywordflow}{if}\ hum\ >\ 80:}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00156}00156\ \ \ \ \ \ \ \ \ emoji\ +=\ \textcolor{stringliteral}{"{}\ 💧"{}}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00157}00157\ \ \ \ \ \textcolor{keywordflow}{elif}\ hum\ <\ 30:}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00158}00158\ \ \ \ \ \ \ \ \ emoji\ +=\ \textcolor{stringliteral}{"{}\ 🔥"{}}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00159}00159\ }
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00160}00160\ \ \ \ \ \textcolor{keywordflow}{return}\ emoji}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00161}00161\ }
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00162}00162\ }
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00163}\mbox{\hyperlink{namespacefrontend__update_a3f89ca40cf37ac36f695a90905c51a05}{00163}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacefrontend__update_a3f89ca40cf37ac36f695a90905c51a05}{render\_footer}}():}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00164}00164\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00165}00165\ \textcolor{stringliteral}{\ \ \ \ @brief\ Display\ the\ GitHub\ project\ footer\ with\ hover\ animation\ and\ SVG\ icon.}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00166}00166\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00167}00167\ \ \ \ \ st.markdown(}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00168}00168\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00169}00169\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ <footer\ style="{}text-\/align:center;\ margin-\/top:2rem;"{}>}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00170}00170\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ <a\ href="{}https://github.com/praveenraj-\/rs/esp-\/weather-\/dashboard"{}}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00171}00171\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ target="{}\_blank"{}}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00172}00172\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ style="{}text-\/decoration:none;\ display:inline-\/flex;\ align-\/items:center;\ gap:8px;}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00173}00173\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ color:\#ccc;\ font-\/weight:500;\ transition:color\ 0.3s\ ease;"{}>}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00174}00174\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <svg\ xmlns="{}http://www.w3.org/2000/svg"{}\ }}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00175}00175\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ width="{}22"{}\ height="{}22"{}\ viewBox="{}0\ 0\ 24\ 24"{}\ fill="{}currentColor"{}>}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00176}00176\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <path\ d="{}M12\ .5C5.65.5.5\ 5.65.5\ 12a11.5\ 11.5\ 0\ 007.87\ 10.93c.58.1.79-\/.25.79-\/.55v-\/1.93}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00177}00177\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ c-\/3.2.7-\/3.88-\/1.54-\/3.88-\/1.54-\/.53-\/1.34-\/1.3-\/1.7-\/1.3-\/1.7-\/1.06-\/.72.08-\/.7.08-\/.7}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00178}00178\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1.17.08\ 1.78\ 1.2\ 1.78\ 1.2\ 1.04\ 1.78\ 2.73\ 1.26\ 3.4.97.1-\/.76.4-\/1.27.73-\/1.56}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00179}00179\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/2.55-\/.29-\/5.23-\/1.28-\/5.23-\/5.67\ 0-\/1.25.44-\/2.27\ 1.17-\/3.07-\/.12-\/.29-\/.51-\/1.46.11-\/3.05}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00180}00180\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0\ 0\ .96-\/.31\ 3.15\ 1.17a10.9\ 10.9\ 0\ 015.73\ 0c2.18-\/1.48\ 3.14-\/1.17\ 3.14-\/1.17}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00181}00181\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .62\ 1.59.23\ 2.76.11\ 3.05.73.8\ 1.16\ 1.82\ 1.16\ 3.07\ 0\ 4.4-\/2.69\ 5.37-\/5.25\ 5.65}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00182}00182\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .41.35.78\ 1.03.78\ 2.08v3.09c0\ .3.2.66.8.55A11.5\ 11.5\ 0\ 0023.5\ 12C23.5\ 5.65}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00183}00183\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 18.35.5\ 12\ .5z"{}/>}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00184}00184\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ </svg>}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00185}00185\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <span>View\ this\ project\ on\ GitHub</span>}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00186}00186\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ </a>}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00187}00187\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ <style>}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00188}00188\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ footer\ a:hover\ \{}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00189}00189\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ color:\ \#58a6ff\ !important;}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00190}00190\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ transform:\ scale(1.05);}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00191}00191\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00192}00192\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ footer\ svg\ \{}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00193}00193\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ transition:\ transform\ 0.3s\ ease,\ color\ 0.3s\ ease;}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00194}00194\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00195}00195\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ footer\ a:hover\ svg\ \{}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00196}00196\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ transform:\ rotate(10deg)\ scale(1.2);}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00197}00197\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ color:\ \#58a6ff;}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00198}00198\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00199}00199\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ </style>}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00200}00200\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ </footer>}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00201}00201\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}},}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00202}00202\ \ \ \ \ \ \ \ \ unsafe\_allow\_html=\textcolor{keyword}{True}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00203}00203\ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00204}00204\ }
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00205}00205\ }
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00206}00206\ \textcolor{comment}{\#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00207}00207\ \textcolor{comment}{\#\ Main\ Execution\ Loop}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00208}00208\ \textcolor{comment}{\#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00209}00209\ }
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00211}00211\ \textcolor{keywordflow}{while}\ \textcolor{keyword}{True}:}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00212}00212\ \ \ \ \ \textcolor{keyword}{with}\ placeholder.container():}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00213}\mbox{\hyperlink{namespacefrontend__update_a1c190857fec1da200982ee78a67cbbc6}{00213}}\ \ \ \ \ \ \ \ \ cols\_top\ =\ st.columns([3,\ 2])}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00214}00214\ }
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00215}00215\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ -\/-\/-\/-\/\ Left:\ OpenWeather\ Data\ -\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00216}00216\ \ \ \ \ \ \ \ \ \textcolor{keyword}{with}\ cols\_top[0]:}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00217}\mbox{\hyperlink{namespacefrontend__update_a36bf6012490bd2371d7a1c56c70502e2}{00217}}\ \ \ \ \ \ \ \ \ \ \ \ \ ow\_data\ =\ \mbox{\hyperlink{namespacefrontend__update_a97fd40664bc7cfb18d6d7759bb0f548b}{fetch\_openweather\_data}}(city)}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00218}00218\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ow\_data:}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00219}\mbox{\hyperlink{namespacefrontend__update_a2ba2680e02978111c7312f0463f6965a}{00219}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ temp\ =\ ow\_data[\textcolor{stringliteral}{"{}main"{}}][\textcolor{stringliteral}{"{}temp"{}}]}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00220}\mbox{\hyperlink{namespacefrontend__update_aedce4cc864b7c7c92151d84e803620a5}{00220}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ hum\ =\ ow\_data[\textcolor{stringliteral}{"{}main"{}}][\textcolor{stringliteral}{"{}humidity"{}}]}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00221}\mbox{\hyperlink{namespacefrontend__update_a27779f5238aab17f7ca5d0a335ec0001}{00221}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ wind\ =\ ow\_data[\textcolor{stringliteral}{"{}wind"{}}][\textcolor{stringliteral}{"{}speed"{}}]}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00222}\mbox{\hyperlink{namespacefrontend__update_abd1d56baaa4d2a49d31558239426c905}{00222}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ desc\ =\ ow\_data[\textcolor{stringliteral}{"{}weather"{}}][0][\textcolor{stringliteral}{"{}description"{}}].capitalize()}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00223}\mbox{\hyperlink{namespacefrontend__update_aaabb781cbf7ec971e46962b35d851458}{00223}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ icon\ =\ ow\_data[\textcolor{stringliteral}{"{}weather"{}}][0][\textcolor{stringliteral}{"{}icon"{}}]}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00224}00224\ }
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00225}00225\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ st.markdown(}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00226}00226\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00227}00227\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <div\ class="{}ow-\/box"{}>}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00228}00228\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <h2>🌍\ Weather\ in\ \{city.title()\}</h2>}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00229}00229\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <img\ src="{}https://openweathermap.org/img/wn/\{icon\}@2x.png"{}\ width="{}80"{}>}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00230}00230\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <h1>\{temp:.1f\}°C</h1>}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00231}00231\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <h3>\{desc\}</h3>}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00232}00232\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <p>💧\ Humidity:\ \{hum\}\%</p>}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00233}00233\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <p>🌬️\ Wind:\ \{wind\}\ m/s</p>}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00234}00234\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ </div>}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00235}00235\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}"{}"{}},}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00236}00236\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ unsafe\_allow\_html=\textcolor{keyword}{True}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00237}00237\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00238}00238\ }
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00239}00239\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ -\/-\/-\/-\/\ Right:\ Date\ and\ Time\ -\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00240}00240\ \ \ \ \ \ \ \ \ \textcolor{keyword}{with}\ cols\_top[1]:}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00241}\mbox{\hyperlink{namespacefrontend__update_a92cd27ab8598d2dc1da8da8a54ee1ae3}{00241}}\ \ \ \ \ \ \ \ \ \ \ \ \ now\ =\ datetime.now()}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00242}00242\ \ \ \ \ \ \ \ \ \ \ \ \ st.markdown(}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00243}00243\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00244}00244\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <div\ class="{}ow-\/box"{}>}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00245}00245\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <h2>🕒\ \{now.strftime("{}\%I:\%M\ \%p"{})\}</h2>}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00246}00246\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <h3>\{now.strftime("{}\%A,\ \%d\ \%B\ \%Y"{})\}</h3>}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00247}00247\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ </div>}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00248}00248\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}"{}"{}},}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00249}00249\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ unsafe\_allow\_html=\textcolor{keyword}{True}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00250}00250\ \ \ \ \ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00251}00251\ }
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00252}00252\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ -\/-\/-\/-\/\ ESP\ Node\ Data\ -\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00253}00253\ \ \ \ \ \ \ \ \ st.subheader(\textcolor{stringliteral}{"{}Connected\ ESP\ Nodes"{}})}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00254}\mbox{\hyperlink{namespacefrontend__update_af83196b5ad18ee88953519ffdc31cbd9}{00254}}\ \ \ \ \ \ \ \ \ esp\_data\ =\ \mbox{\hyperlink{namespacefrontend__update_a1c85d744e929d9f1b2895250edf56c25}{fetch\_esp\_data}}()}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00255}00255\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ esp\_data:}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00256}00256\ \ \ \ \ \ \ \ \ \ \ \ \ st.info(\textcolor{stringliteral}{"{}Waiting\ for\ ESP\ nodes\ to\ send\ data..."{}})}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00257}00257\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00258}\mbox{\hyperlink{namespacefrontend__update_aad3fe74b25176529b906421d2d25df14}{00258}}\ \ \ \ \ \ \ \ \ \ \ \ \ sorted\_nodes\ =\ sorted(esp\_data.items(),\ key=\textcolor{keyword}{lambda}\ x:\ int(x[0]))}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00259}\mbox{\hyperlink{namespacefrontend__update_a08c7e909960b338241cdd64946d3d47a}{00259}}\ \ \ \ \ \ \ \ \ \ \ \ \ cols\ =\ st.columns(len(sorted\_nodes))}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00260}00260\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ i,\ (node\_id,\ node\_data)\ \textcolor{keywordflow}{in}\ enumerate(sorted\_nodes):}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00261}00261\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ temp\ =\ node\_data[\textcolor{stringliteral}{"{}temperature"{}}]}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00262}00262\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ hum\ =\ node\_data[\textcolor{stringliteral}{"{}humidity"{}}]}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00263}\mbox{\hyperlink{namespacefrontend__update_ab725a42c14e11f03fb30d3cb1e3e48ab}{00263}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ timestamp\ =\ node\_data.get(\textcolor{stringliteral}{"{}timestamp"{}},\ \textcolor{stringliteral}{"{}N/A"{}})}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00264}\mbox{\hyperlink{namespacefrontend__update_a74062a17660a353467703d895b65889c}{00264}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ emoji\ =\ \mbox{\hyperlink{namespacefrontend__update_a157e071b3a485a21b612f93d77fbd8c4}{get\_weather\_emoji}}(temp,\ hum)}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00265}00265\ }
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00266}00266\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{with}\ cols[i]:}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00267}00267\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ st.markdown(}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00268}00268\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00269}00269\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <div\ class="{}weather-\/box"{}>}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00270}00270\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <span\ class="{}emoji"{}>\{emoji\}</span>}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00271}00271\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <h3>Node\ \{node\_id\}</h3>}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00272}00272\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <h4>\{temp:.1f\}°C</h4>}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00273}00273\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <p>💧\ \{hum:.1f\}\%\ Humidity</p>}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00274}00274\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <small>Last\ update:<br>\{timestamp\}</small>}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00275}00275\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ </div>}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00276}00276\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}"{}"{}},}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00277}00277\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ unsafe\_allow\_html=\textcolor{keyword}{True}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00278}00278\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00279}00279\ }
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00280}00280\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ -\/-\/-\/-\/\ Footer\ -\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00281}00281\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacefrontend__update_a3f89ca40cf37ac36f695a90905c51a05}{render\_footer}}()}
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00282}00282\ }
+\DoxyCodeLine{\Hypertarget{frontend__update_8py_source_l00283}00283\ \ \ \ \ time.sleep(5)}
+
+\end{DoxyCode}

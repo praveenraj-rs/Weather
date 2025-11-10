@@ -1,0 +1,63 @@
+\doxysection{Frontend/frontend\+\_\+update.py File Reference}
+\hypertarget{frontend__update_8py}{}\label{frontend__update_8py}\index{Frontend/frontend\_update.py@{Frontend/frontend\_update.py}}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacefrontend__update}{frontend\+\_\+update}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacefrontend__update_a97fd40664bc7cfb18d6d7759bb0f548b}{frontend\+\_\+update.\+fetch\+\_\+openweather\+\_\+data}} (\mbox{\hyperlink{namespacefrontend__update_a3acb9fafb96b85c19919a7e7d84675d2}{city}})
+\begin{DoxyCompactList}\small\item\em Fetch current weather data from Open\+Weather API. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacefrontend__update_a1c85d744e929d9f1b2895250edf56c25}{frontend\+\_\+update.\+fetch\+\_\+esp\+\_\+data}} ()
+\begin{DoxyCompactList}\small\item\em Retrieve environmental data from backend ESP nodes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacefrontend__update_a157e071b3a485a21b612f93d77fbd8c4}{frontend\+\_\+update.\+get\+\_\+weather\+\_\+emoji}} (\mbox{\hyperlink{namespacefrontend__update_a2ba2680e02978111c7312f0463f6965a}{temp}}, \mbox{\hyperlink{namespacefrontend__update_aedce4cc864b7c7c92151d84e803620a5}{hum}})
+\begin{DoxyCompactList}\small\item\em Determine weather emoji based on temperature and humidity. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacefrontend__update_a3f89ca40cf37ac36f695a90905c51a05}{frontend\+\_\+update.\+render\+\_\+footer}} ()
+\begin{DoxyCompactList}\small\item\em Display the Git\+Hub project footer with hover animation and SVG icon. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{namespacefrontend__update_a776cd2c9f35e2ea0f1435d21b1db4cc9}{frontend\+\_\+update.\+BACKEND\+\_\+\+URL}} = "{}http\+://localhost\+:8000/data"{}
+\begin{DoxyCompactList}\small\item\em Backend API endpoint for ESP sensor data. \end{DoxyCompactList}\item 
+str \mbox{\hyperlink{namespacefrontend__update_acf4fce23114c30f90de9e72c4f6a4553}{frontend\+\_\+update.\+OPENWEATHER\+\_\+\+API}} = "{}https\+://openweathermap.\+org/data/2.\+5/weather"{}
+\begin{DoxyCompactList}\small\item\em Base URL for Open\+Weather public API. \end{DoxyCompactList}\item 
+str \mbox{\hyperlink{namespacefrontend__update_a5d00a1fb26219c67f923ee1b6739f83d}{frontend\+\_\+update.\+OPENWEATHER\+\_\+\+KEY}} = "{}439d4b804bc8187953eb36d2a8c26a02"{}
+\begin{DoxyCompactList}\small\item\em Demo API key for Open\+Weather API. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacefrontend__update_a1fc022dd91d99494a6ad086a0e619177}{frontend\+\_\+update.\+page\+\_\+title}}
+\begin{DoxyCompactList}\small\item\em Configure Streamlit application layout and appearance. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacefrontend__update_abc82edf35fc263707c1a115558628e32}{frontend\+\_\+update.\+layout}}
+\item 
+\mbox{\hyperlink{namespacefrontend__update_aae303daff2ba22b8540f529e71c475cc}{frontend\+\_\+update.\+unsafe\+\_\+allow\+\_\+html}}
+\begin{DoxyCompactList}\small\item\em Apply custom dark-\/themed CSS styling for the dashboard. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacefrontend__update_a3acb9fafb96b85c19919a7e7d84675d2}{frontend\+\_\+update.\+city}} = st.\+text\+\_\+input("{}🌍 Enter city name\+:"{}, "{}Ettimadai"{}).strip()
+\begin{DoxyCompactList}\small\item\em User input field to select a city for Open\+Weather data. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacefrontend__update_aab39ab7fd64debe58638ffa410fa51c2}{frontend\+\_\+update.\+placeholder}} = st.\+empty()
+\begin{DoxyCompactList}\small\item\em Streamlit placeholder for dynamic dashboard updates. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacefrontend__update_a1c190857fec1da200982ee78a67cbbc6}{frontend\+\_\+update.\+cols\+\_\+top}} = st.\+columns(\mbox{[}3, 2\mbox{]})
+\begin{DoxyCompactList}\small\item\em Continuous dashboard update loop. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacefrontend__update_a36bf6012490bd2371d7a1c56c70502e2}{frontend\+\_\+update.\+ow\+\_\+data}} = \mbox{\hyperlink{namespacefrontend__update_a97fd40664bc7cfb18d6d7759bb0f548b}{fetch\+\_\+openweather\+\_\+data}}(\mbox{\hyperlink{namespacefrontend__update_a3acb9fafb96b85c19919a7e7d84675d2}{city}})
+\item 
+\mbox{\hyperlink{namespacefrontend__update_a2ba2680e02978111c7312f0463f6965a}{frontend\+\_\+update.\+temp}} = \mbox{\hyperlink{namespacefrontend__update_a36bf6012490bd2371d7a1c56c70502e2}{ow\+\_\+data}}\mbox{[}"{}main"{}\mbox{]}\mbox{[}"{}temp"{}\mbox{]}
+\item 
+\mbox{\hyperlink{namespacefrontend__update_aedce4cc864b7c7c92151d84e803620a5}{frontend\+\_\+update.\+hum}} = \mbox{\hyperlink{namespacefrontend__update_a36bf6012490bd2371d7a1c56c70502e2}{ow\+\_\+data}}\mbox{[}"{}main"{}\mbox{]}\mbox{[}"{}humidity"{}\mbox{]}
+\item 
+\mbox{\hyperlink{namespacefrontend__update_a27779f5238aab17f7ca5d0a335ec0001}{frontend\+\_\+update.\+wind}} = \mbox{\hyperlink{namespacefrontend__update_a36bf6012490bd2371d7a1c56c70502e2}{ow\+\_\+data}}\mbox{[}"{}wind"{}\mbox{]}\mbox{[}"{}speed"{}\mbox{]}
+\item 
+\mbox{\hyperlink{namespacefrontend__update_abd1d56baaa4d2a49d31558239426c905}{frontend\+\_\+update.\+desc}} = \mbox{\hyperlink{namespacefrontend__update_a36bf6012490bd2371d7a1c56c70502e2}{ow\+\_\+data}}\mbox{[}"{}weather"{}\mbox{]}\mbox{[}0\mbox{]}\mbox{[}"{}description"{}\mbox{]}.capitalize()
+\item 
+\mbox{\hyperlink{namespacefrontend__update_aaabb781cbf7ec971e46962b35d851458}{frontend\+\_\+update.\+icon}} = \mbox{\hyperlink{namespacefrontend__update_a36bf6012490bd2371d7a1c56c70502e2}{ow\+\_\+data}}\mbox{[}"{}weather"{}\mbox{]}\mbox{[}0\mbox{]}\mbox{[}"{}icon"{}\mbox{]}
+\item 
+\mbox{\hyperlink{namespacefrontend__update_a92cd27ab8598d2dc1da8da8a54ee1ae3}{frontend\+\_\+update.\+now}} = datetime.\+now()
+\item 
+\mbox{\hyperlink{namespacefrontend__update_af83196b5ad18ee88953519ffdc31cbd9}{frontend\+\_\+update.\+esp\+\_\+data}} = \mbox{\hyperlink{namespacefrontend__update_a1c85d744e929d9f1b2895250edf56c25}{fetch\+\_\+esp\+\_\+data}}()
+\item 
+\mbox{\hyperlink{namespacefrontend__update_aad3fe74b25176529b906421d2d25df14}{frontend\+\_\+update.\+sorted\+\_\+nodes}} = sorted(esp\+\_\+data.\+items(), key=lambda x\+: int(x\mbox{[}0\mbox{]}))
+\item 
+\mbox{\hyperlink{namespacefrontend__update_a08c7e909960b338241cdd64946d3d47a}{frontend\+\_\+update.\+cols}} = st.\+columns(len(\mbox{\hyperlink{namespacefrontend__update_aad3fe74b25176529b906421d2d25df14}{sorted\+\_\+nodes}}))
+\item 
+\mbox{\hyperlink{namespacefrontend__update_ab725a42c14e11f03fb30d3cb1e3e48ab}{frontend\+\_\+update.\+timestamp}} = node\+\_\+data.\+get("{}timestamp"{}, "{}N/A"{})
+\item 
+\mbox{\hyperlink{namespacefrontend__update_a74062a17660a353467703d895b65889c}{frontend\+\_\+update.\+emoji}} = \mbox{\hyperlink{namespacefrontend__update_a157e071b3a485a21b612f93d77fbd8c4}{get\+\_\+weather\+\_\+emoji}}(\mbox{\hyperlink{namespacefrontend__update_a2ba2680e02978111c7312f0463f6965a}{temp}}, \mbox{\hyperlink{namespacefrontend__update_aedce4cc864b7c7c92151d84e803620a5}{hum}})
+\end{DoxyCompactItemize}

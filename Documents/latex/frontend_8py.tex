@@ -1,0 +1,79 @@
+\doxysection{Frontend/frontend.py File Reference}
+\hypertarget{frontend_8py}{}\label{frontend_8py}\index{Frontend/frontend.py@{Frontend/frontend.py}}
+
+
+Streamlit frontend dashboard for ESP Weather Monitoring System.  
+
+
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacefrontend}{frontend}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacefrontend_a690c5602dc3641f73d0e8631e67c42eb}{frontend.\+fetch\+\_\+backend\+\_\+data}} ()
+\begin{DoxyCompactList}\small\item\em Fetch JSON weather data from the backend API. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacefrontend_a1207e84235d192dcefc423b7e0480200}{frontend.\+get\+\_\+weather\+\_\+emoji}} (temp, hum)
+\begin{DoxyCompactList}\small\item\em Determine a weather emoji based on temperature and humidity. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacefrontend_a76473c6c197c876324063da8074ff1ea}{frontend.\+render\+\_\+dashboard}} (\mbox{\hyperlink{namespacefrontend_a99c03e7834eb7b359fa8378cffc0c5e7}{data}})
+\begin{DoxyCompactList}\small\item\em Render weather cards for all connected ESP nodes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{namespacefrontend_a93a188c1fb2d93dcf7d4743344bd7ff3}{frontend.\+BACKEND\+\_\+\+URL}} = "{}http\+://localhost\+:8000/data"{}
+\begin{DoxyCompactList}\small\item\em URL endpoint of the backend API. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacefrontend_a6611c317b10a0f402c244f49576d3ca4}{frontend.\+page\+\_\+title}}
+\begin{DoxyCompactList}\small\item\em Configure Streamlit page layout and appearance. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacefrontend_aaa106e88b5e7ce7e1a23f407c4541ab9}{frontend.\+layout}}
+\item 
+\mbox{\hyperlink{namespacefrontend_a4c3d076d449f8c3199686f78fd9c17ed}{frontend.\+unsafe\+\_\+allow\+\_\+html}}
+\begin{DoxyCompactList}\small\item\em Custom dark theme CSS for dashboard styling. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacefrontend_ad2199c479862cd998d7b73e71a0da5d6}{frontend.\+placeholder}} = st.\+empty()
+\begin{DoxyCompactList}\small\item\em Main dashboard title. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacefrontend_a99c03e7834eb7b359fa8378cffc0c5e7}{frontend.\+data}} = \mbox{\hyperlink{namespacefrontend_a690c5602dc3641f73d0e8631e67c42eb}{fetch\+\_\+backend\+\_\+data}}()
+\begin{DoxyCompactList}\small\item\em Continuously update the dashboard every 5 seconds with backend data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Streamlit frontend dashboard for ESP Weather Monitoring System. 
+
+Streamlit-\/based IoT dashboard for ESP sensor data and Open\+Weather API.
+
+This Streamlit application continuously fetches weather data from the backend REST API and displays live temperature and humidity readings from multiple ESP nodes.
+
+It uses a custom dark UI theme, dynamic weather icons, and auto-\/refresh functionality to provide a user-\/friendly IoT dashboard.
+
+\begin{DoxyAuthor}{Author}
+Praveenraj R S 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2025-\/11-\/11 
+\end{DoxyDate}
+\begin{DoxyVersion}{Version}
+1.\+0
+\end{DoxyVersion}
+This Streamlit frontend visualizes live environmental data collected from ESP-\/based IoT nodes and integrates real-\/time weather information using the Open\+Weather API. The dashboard displays\+:
+\begin{DoxyItemize}
+\item Temperature, humidity, and status from multiple ESP devices
+\item Live weather data for a selected city
+\item Local date and time display
+\item A Git\+Hub footer link for project reference
+\end{DoxyItemize}
+
+The application automatically refreshes every 5 seconds to ensure real-\/time updates.
+
+\begin{DoxyAuthor}{Author}
+Anuli Jenn T 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2025-\/11-\/11 
+\end{DoxyDate}
+\begin{DoxyVersion}{Version}
+2.\+0 
+\end{DoxyVersion}
+
+
+Definition in file \mbox{\hyperlink{frontend_8py_source}{frontend.\+py}}.
+

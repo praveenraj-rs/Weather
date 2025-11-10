@@ -1,0 +1,506 @@
+\doxysection{frontend\+\_\+update Namespace Reference}
+\hypertarget{namespacefrontend__update}{}\label{namespacefrontend__update}\index{frontend\_update@{frontend\_update}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacefrontend__update_a97fd40664bc7cfb18d6d7759bb0f548b}{fetch\+\_\+openweather\+\_\+data}} (\mbox{\hyperlink{namespacefrontend__update_a3acb9fafb96b85c19919a7e7d84675d2}{city}})
+\begin{DoxyCompactList}\small\item\em Fetch current weather data from Open\+Weather API. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacefrontend__update_a1c85d744e929d9f1b2895250edf56c25}{fetch\+\_\+esp\+\_\+data}} ()
+\begin{DoxyCompactList}\small\item\em Retrieve environmental data from backend ESP nodes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacefrontend__update_a157e071b3a485a21b612f93d77fbd8c4}{get\+\_\+weather\+\_\+emoji}} (\mbox{\hyperlink{namespacefrontend__update_a2ba2680e02978111c7312f0463f6965a}{temp}}, \mbox{\hyperlink{namespacefrontend__update_aedce4cc864b7c7c92151d84e803620a5}{hum}})
+\begin{DoxyCompactList}\small\item\em Determine weather emoji based on temperature and humidity. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacefrontend__update_a3f89ca40cf37ac36f695a90905c51a05}{render\+\_\+footer}} ()
+\begin{DoxyCompactList}\small\item\em Display the Git\+Hub project footer with hover animation and SVG icon. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{namespacefrontend__update_a776cd2c9f35e2ea0f1435d21b1db4cc9}{BACKEND\+\_\+\+URL}} = "{}http\+://localhost\+:8000/data"{}
+\begin{DoxyCompactList}\small\item\em Backend API endpoint for ESP sensor data. \end{DoxyCompactList}\item 
+str \mbox{\hyperlink{namespacefrontend__update_acf4fce23114c30f90de9e72c4f6a4553}{OPENWEATHER\+\_\+\+API}} = "{}https\+://openweathermap.\+org/data/2.\+5/weather"{}
+\begin{DoxyCompactList}\small\item\em Base URL for Open\+Weather public API. \end{DoxyCompactList}\item 
+str \mbox{\hyperlink{namespacefrontend__update_a5d00a1fb26219c67f923ee1b6739f83d}{OPENWEATHER\+\_\+\+KEY}} = "{}439d4b804bc8187953eb36d2a8c26a02"{}
+\begin{DoxyCompactList}\small\item\em Demo API key for Open\+Weather API. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacefrontend__update_a1fc022dd91d99494a6ad086a0e619177}{page\+\_\+title}}
+\begin{DoxyCompactList}\small\item\em Configure Streamlit application layout and appearance. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacefrontend__update_abc82edf35fc263707c1a115558628e32}{layout}}
+\item 
+\mbox{\hyperlink{namespacefrontend__update_aae303daff2ba22b8540f529e71c475cc}{unsafe\+\_\+allow\+\_\+html}}
+\begin{DoxyCompactList}\small\item\em Apply custom dark-\/themed CSS styling for the dashboard. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacefrontend__update_a3acb9fafb96b85c19919a7e7d84675d2}{city}} = st.\+text\+\_\+input("{}🌍 Enter city name\+:"{}, "{}Ettimadai"{}).strip()
+\begin{DoxyCompactList}\small\item\em User input field to select a city for Open\+Weather data. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacefrontend__update_aab39ab7fd64debe58638ffa410fa51c2}{placeholder}} = st.\+empty()
+\begin{DoxyCompactList}\small\item\em Streamlit placeholder for dynamic dashboard updates. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacefrontend__update_a1c190857fec1da200982ee78a67cbbc6}{cols\+\_\+top}} = st.\+columns(\mbox{[}3, 2\mbox{]})
+\begin{DoxyCompactList}\small\item\em Continuous dashboard update loop. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacefrontend__update_a36bf6012490bd2371d7a1c56c70502e2}{ow\+\_\+data}} = \mbox{\hyperlink{namespacefrontend__update_a97fd40664bc7cfb18d6d7759bb0f548b}{fetch\+\_\+openweather\+\_\+data}}(\mbox{\hyperlink{namespacefrontend__update_a3acb9fafb96b85c19919a7e7d84675d2}{city}})
+\item 
+\mbox{\hyperlink{namespacefrontend__update_a2ba2680e02978111c7312f0463f6965a}{temp}} = \mbox{\hyperlink{namespacefrontend__update_a36bf6012490bd2371d7a1c56c70502e2}{ow\+\_\+data}}\mbox{[}"{}main"{}\mbox{]}\mbox{[}"{}temp"{}\mbox{]}
+\item 
+\mbox{\hyperlink{namespacefrontend__update_aedce4cc864b7c7c92151d84e803620a5}{hum}} = \mbox{\hyperlink{namespacefrontend__update_a36bf6012490bd2371d7a1c56c70502e2}{ow\+\_\+data}}\mbox{[}"{}main"{}\mbox{]}\mbox{[}"{}humidity"{}\mbox{]}
+\item 
+\mbox{\hyperlink{namespacefrontend__update_a27779f5238aab17f7ca5d0a335ec0001}{wind}} = \mbox{\hyperlink{namespacefrontend__update_a36bf6012490bd2371d7a1c56c70502e2}{ow\+\_\+data}}\mbox{[}"{}wind"{}\mbox{]}\mbox{[}"{}speed"{}\mbox{]}
+\item 
+\mbox{\hyperlink{namespacefrontend__update_abd1d56baaa4d2a49d31558239426c905}{desc}} = \mbox{\hyperlink{namespacefrontend__update_a36bf6012490bd2371d7a1c56c70502e2}{ow\+\_\+data}}\mbox{[}"{}weather"{}\mbox{]}\mbox{[}0\mbox{]}\mbox{[}"{}description"{}\mbox{]}.capitalize()
+\item 
+\mbox{\hyperlink{namespacefrontend__update_aaabb781cbf7ec971e46962b35d851458}{icon}} = \mbox{\hyperlink{namespacefrontend__update_a36bf6012490bd2371d7a1c56c70502e2}{ow\+\_\+data}}\mbox{[}"{}weather"{}\mbox{]}\mbox{[}0\mbox{]}\mbox{[}"{}icon"{}\mbox{]}
+\item 
+\mbox{\hyperlink{namespacefrontend__update_a92cd27ab8598d2dc1da8da8a54ee1ae3}{now}} = datetime.\+now()
+\item 
+\mbox{\hyperlink{namespacefrontend__update_af83196b5ad18ee88953519ffdc31cbd9}{esp\+\_\+data}} = \mbox{\hyperlink{namespacefrontend__update_a1c85d744e929d9f1b2895250edf56c25}{fetch\+\_\+esp\+\_\+data}}()
+\item 
+\mbox{\hyperlink{namespacefrontend__update_aad3fe74b25176529b906421d2d25df14}{sorted\+\_\+nodes}} = sorted(esp\+\_\+data.\+items(), key=lambda x\+: int(x\mbox{[}0\mbox{]}))
+\item 
+\mbox{\hyperlink{namespacefrontend__update_a08c7e909960b338241cdd64946d3d47a}{cols}} = st.\+columns(len(\mbox{\hyperlink{namespacefrontend__update_aad3fe74b25176529b906421d2d25df14}{sorted\+\_\+nodes}}))
+\item 
+\mbox{\hyperlink{namespacefrontend__update_ab725a42c14e11f03fb30d3cb1e3e48ab}{timestamp}} = node\+\_\+data.\+get("{}timestamp"{}, "{}N/A"{})
+\item 
+\mbox{\hyperlink{namespacefrontend__update_a74062a17660a353467703d895b65889c}{emoji}} = \mbox{\hyperlink{namespacefrontend__update_a157e071b3a485a21b612f93d77fbd8c4}{get\+\_\+weather\+\_\+emoji}}(\mbox{\hyperlink{namespacefrontend__update_a2ba2680e02978111c7312f0463f6965a}{temp}}, \mbox{\hyperlink{namespacefrontend__update_aedce4cc864b7c7c92151d84e803620a5}{hum}})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacefrontend__update_a1c85d744e929d9f1b2895250edf56c25}\label{namespacefrontend__update_a1c85d744e929d9f1b2895250edf56c25} 
+\index{frontend\_update@{frontend\_update}!fetch\_esp\_data@{fetch\_esp\_data}}
+\index{fetch\_esp\_data@{fetch\_esp\_data}!frontend\_update@{frontend\_update}}
+\doxysubsubsection{\texorpdfstring{fetch\_esp\_data()}{fetch\_esp\_data()}}
+{\footnotesize\ttfamily frontend\+\_\+update.\+fetch\+\_\+esp\+\_\+data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Retrieve environmental data from backend ESP nodes. 
+
+\begin{DoxyReturn}{Returns}
+dict\+: Node-\/wise dictionary containing temperature, humidity, and timestamps. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{frontend__update_8py_source_l00124}{124}} of file \mbox{\hyperlink{frontend__update_8py_source}{frontend\+\_\+update.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00124\ \textcolor{keyword}{def\ }fetch\_esp\_data():}
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{00126\ \textcolor{stringliteral}{\ \ \ \ @brief\ Retrieve\ environmental\ data\ from\ backend\ ESP\ nodes.}}
+\DoxyCodeLine{00127\ \textcolor{stringliteral}{\ \ \ \ @return\ dict:\ Node-\/wise\ dictionary\ containing\ temperature,\ humidity,\ and\ timestamps.}}
+\DoxyCodeLine{00128\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00129\ \ \ \ \ \textcolor{keywordflow}{try}:}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ response\ =\ requests.get(BACKEND\_URL)}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ response.status\_code\ ==\ 200:}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ response.json()}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\}}
+\DoxyCodeLine{00134\ \ \ \ \ \textcolor{keywordflow}{except}\ Exception\ \textcolor{keyword}{as}\ e:}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ st.error(f\textcolor{stringliteral}{"{}Error\ fetching\ ESP\ data:\ \{e\}"{}})}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\}}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00138\ }
+
+\end{DoxyCode}
+\Hypertarget{namespacefrontend__update_a97fd40664bc7cfb18d6d7759bb0f548b}\label{namespacefrontend__update_a97fd40664bc7cfb18d6d7759bb0f548b} 
+\index{frontend\_update@{frontend\_update}!fetch\_openweather\_data@{fetch\_openweather\_data}}
+\index{fetch\_openweather\_data@{fetch\_openweather\_data}!frontend\_update@{frontend\_update}}
+\doxysubsubsection{\texorpdfstring{fetch\_openweather\_data()}{fetch\_openweather\_data()}}
+{\footnotesize\ttfamily frontend\+\_\+update.\+fetch\+\_\+openweather\+\_\+data (\begin{DoxyParamCaption}\item[{}]{city }\end{DoxyParamCaption})}
+
+
+
+Fetch current weather data from Open\+Weather API. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em city} & City name as string. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+dict\+: Parsed JSON response containing temperature, humidity, wind, and description. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{frontend__update_8py_source_l00105}{105}} of file \mbox{\hyperlink{frontend__update_8py_source}{frontend\+\_\+update.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00105\ \textcolor{keyword}{def\ }fetch\_openweather\_data(city):}
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{00107\ \textcolor{stringliteral}{\ \ \ \ @brief\ Fetch\ current\ weather\ data\ from\ OpenWeather\ API.}}
+\DoxyCodeLine{00108\ \textcolor{stringliteral}{\ \ \ \ @param\ city\ City\ name\ as\ string.}}
+\DoxyCodeLine{00109\ \textcolor{stringliteral}{\ \ \ \ @return\ dict:\ Parsed\ JSON\ response\ containing\ temperature,\ humidity,\ wind,\ and\ description.}}
+\DoxyCodeLine{00110\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keywordflow}{try}:}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ ow\_url\ =\ f\textcolor{stringliteral}{"{}\{OPENWEATHER\_API\}?q=\{city\}\&appid=\{OPENWEATHER\_KEY\}\&units=metric"{}}}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ response\ =\ requests.get(ow\_url)}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ response.status\_code\ ==\ 200:}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ response.json()}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ st.error(\textcolor{stringliteral}{"{}Failed\ to\ fetch\ OpenWeather\ data."{}})}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\}}
+\DoxyCodeLine{00119\ \ \ \ \ \textcolor{keywordflow}{except}\ Exception\ \textcolor{keyword}{as}\ e:}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ st.error(f\textcolor{stringliteral}{"{}Error\ fetching\ weather:\ \{e\}"{}})}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\}}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00123\ }
+
+\end{DoxyCode}
+\Hypertarget{namespacefrontend__update_a157e071b3a485a21b612f93d77fbd8c4}\label{namespacefrontend__update_a157e071b3a485a21b612f93d77fbd8c4} 
+\index{frontend\_update@{frontend\_update}!get\_weather\_emoji@{get\_weather\_emoji}}
+\index{get\_weather\_emoji@{get\_weather\_emoji}!frontend\_update@{frontend\_update}}
+\doxysubsubsection{\texorpdfstring{get\_weather\_emoji()}{get\_weather\_emoji()}}
+{\footnotesize\ttfamily frontend\+\_\+update.\+get\+\_\+weather\+\_\+emoji (\begin{DoxyParamCaption}\item[{}]{temp,  }\item[{}]{hum }\end{DoxyParamCaption})}
+
+
+
+Determine weather emoji based on temperature and humidity. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em temp} & Temperature in °C. \\
+\hline
+{\em hum} & Humidity percentage. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+str\+: Unicode emoji string. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{frontend__update_8py_source_l00139}{139}} of file \mbox{\hyperlink{frontend__update_8py_source}{frontend\+\_\+update.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00139\ \textcolor{keyword}{def\ }get\_weather\_emoji(temp,\ hum):}
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{00141\ \textcolor{stringliteral}{\ \ \ \ @brief\ Determine\ weather\ emoji\ based\ on\ temperature\ and\ humidity.}}
+\DoxyCodeLine{00142\ \textcolor{stringliteral}{\ \ \ \ @param\ temp\ Temperature\ in\ °C.}}
+\DoxyCodeLine{00143\ \textcolor{stringliteral}{\ \ \ \ @param\ hum\ Humidity\ percentage.}}
+\DoxyCodeLine{00144\ \textcolor{stringliteral}{\ \ \ \ @return\ str:\ Unicode\ emoji\ string.}}
+\DoxyCodeLine{00145\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00146\ \ \ \ \ \textcolor{keywordflow}{if}\ temp\ >\ 30:}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ emoji\ =\ \textcolor{stringliteral}{"{}☀️"{}}}
+\DoxyCodeLine{00148\ \ \ \ \ \textcolor{keywordflow}{elif}\ temp\ >\ 20:}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ emoji\ =\ \textcolor{stringliteral}{"{}⛅"{}}}
+\DoxyCodeLine{00150\ \ \ \ \ \textcolor{keywordflow}{elif}\ temp\ >\ 10:}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ emoji\ =\ \textcolor{stringliteral}{"{}🌧️"{}}}
+\DoxyCodeLine{00152\ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ emoji\ =\ \textcolor{stringliteral}{"{}❄️"{}}}
+\DoxyCodeLine{00154\ }
+\DoxyCodeLine{00155\ \ \ \ \ \textcolor{keywordflow}{if}\ hum\ >\ 80:}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ emoji\ +=\ \textcolor{stringliteral}{"{}\ 💧"{}}}
+\DoxyCodeLine{00157\ \ \ \ \ \textcolor{keywordflow}{elif}\ hum\ <\ 30:}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ emoji\ +=\ \textcolor{stringliteral}{"{}\ 🔥"{}}}
+\DoxyCodeLine{00159\ }
+\DoxyCodeLine{00160\ \ \ \ \ \textcolor{keywordflow}{return}\ emoji}
+\DoxyCodeLine{00161\ }
+\DoxyCodeLine{00162\ }
+
+\end{DoxyCode}
+\Hypertarget{namespacefrontend__update_a3f89ca40cf37ac36f695a90905c51a05}\label{namespacefrontend__update_a3f89ca40cf37ac36f695a90905c51a05} 
+\index{frontend\_update@{frontend\_update}!render\_footer@{render\_footer}}
+\index{render\_footer@{render\_footer}!frontend\_update@{frontend\_update}}
+\doxysubsubsection{\texorpdfstring{render\_footer()}{render\_footer()}}
+{\footnotesize\ttfamily frontend\+\_\+update.\+render\+\_\+footer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Display the Git\+Hub project footer with hover animation and SVG icon. 
+
+
+
+Definition at line \mbox{\hyperlink{frontend__update_8py_source_l00163}{163}} of file \mbox{\hyperlink{frontend__update_8py_source}{frontend\+\_\+update.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00163\ \textcolor{keyword}{def\ }render\_footer():}
+\DoxyCodeLine{00164\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}!}}
+\DoxyCodeLine{00165\ \textcolor{stringliteral}{\ \ \ \ @brief\ Display\ the\ GitHub\ project\ footer\ with\ hover\ animation\ and\ SVG\ icon.}}
+\DoxyCodeLine{00166\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00167\ \ \ \ \ st.markdown(}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{00169\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ <footer\ style="{}text-\/align:center;\ margin-\/top:2rem;"{}>}}
+\DoxyCodeLine{00170\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ <a\ href="{}https://github.com/praveenraj-\/rs/esp-\/weather-\/dashboard"{}}}
+\DoxyCodeLine{00171\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ target="{}\_blank"{}}}
+\DoxyCodeLine{00172\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ style="{}text-\/decoration:none;\ display:inline-\/flex;\ align-\/items:center;\ gap:8px;}}
+\DoxyCodeLine{00173\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ color:\#ccc;\ font-\/weight:500;\ transition:color\ 0.3s\ ease;"{}>}}
+\DoxyCodeLine{00174\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <svg\ xmlns="{}http://www.w3.org/2000/svg"{}\ }}
+\DoxyCodeLine{00175\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ width="{}22"{}\ height="{}22"{}\ viewBox="{}0\ 0\ 24\ 24"{}\ fill="{}currentColor"{}>}}
+\DoxyCodeLine{00176\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <path\ d="{}M12\ .5C5.65.5.5\ 5.65.5\ 12a11.5\ 11.5\ 0\ 007.87\ 10.93c.58.1.79-\/.25.79-\/.55v-\/1.93}}
+\DoxyCodeLine{00177\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ c-\/3.2.7-\/3.88-\/1.54-\/3.88-\/1.54-\/.53-\/1.34-\/1.3-\/1.7-\/1.3-\/1.7-\/1.06-\/.72.08-\/.7.08-\/.7}}
+\DoxyCodeLine{00178\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1.17.08\ 1.78\ 1.2\ 1.78\ 1.2\ 1.04\ 1.78\ 2.73\ 1.26\ 3.4.97.1-\/.76.4-\/1.27.73-\/1.56}}
+\DoxyCodeLine{00179\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/2.55-\/.29-\/5.23-\/1.28-\/5.23-\/5.67\ 0-\/1.25.44-\/2.27\ 1.17-\/3.07-\/.12-\/.29-\/.51-\/1.46.11-\/3.05}}
+\DoxyCodeLine{00180\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0\ 0\ .96-\/.31\ 3.15\ 1.17a10.9\ 10.9\ 0\ 015.73\ 0c2.18-\/1.48\ 3.14-\/1.17\ 3.14-\/1.17}}
+\DoxyCodeLine{00181\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .62\ 1.59.23\ 2.76.11\ 3.05.73.8\ 1.16\ 1.82\ 1.16\ 3.07\ 0\ 4.4-\/2.69\ 5.37-\/5.25\ 5.65}}
+\DoxyCodeLine{00182\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .41.35.78\ 1.03.78\ 2.08v3.09c0\ .3.2.66.8.55A11.5\ 11.5\ 0\ 0023.5\ 12C23.5\ 5.65}}
+\DoxyCodeLine{00183\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 18.35.5\ 12\ .5z"{}/>}}
+\DoxyCodeLine{00184\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ </svg>}}
+\DoxyCodeLine{00185\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <span>View\ this\ project\ on\ GitHub</span>}}
+\DoxyCodeLine{00186\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ </a>}}
+\DoxyCodeLine{00187\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ <style>}}
+\DoxyCodeLine{00188\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ footer\ a:hover\ \{}}
+\DoxyCodeLine{00189\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ color:\ \#58a6ff\ !important;}}
+\DoxyCodeLine{00190\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ transform:\ scale(1.05);}}
+\DoxyCodeLine{00191\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00192\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ footer\ svg\ \{}}
+\DoxyCodeLine{00193\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ transition:\ transform\ 0.3s\ ease,\ color\ 0.3s\ ease;}}
+\DoxyCodeLine{00194\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00195\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ footer\ a:hover\ svg\ \{}}
+\DoxyCodeLine{00196\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ transform:\ rotate(10deg)\ scale(1.2);}}
+\DoxyCodeLine{00197\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ color:\ \#58a6ff;}}
+\DoxyCodeLine{00198\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00199\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ </style>}}
+\DoxyCodeLine{00200\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ </footer>}}
+\DoxyCodeLine{00201\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}},}
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ unsafe\_allow\_html=\textcolor{keyword}{True}}
+\DoxyCodeLine{00203\ \ \ \ \ )}
+\DoxyCodeLine{00204\ }
+\DoxyCodeLine{00205\ }
+\DoxyCodeLine{00206\ \textcolor{comment}{\#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00207\ \textcolor{comment}{\#\ Main\ Execution\ Loop}}
+\DoxyCodeLine{00208\ \textcolor{comment}{\#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespacefrontend__update_a776cd2c9f35e2ea0f1435d21b1db4cc9}\label{namespacefrontend__update_a776cd2c9f35e2ea0f1435d21b1db4cc9} 
+\index{frontend\_update@{frontend\_update}!BACKEND\_URL@{BACKEND\_URL}}
+\index{BACKEND\_URL@{BACKEND\_URL}!frontend\_update@{frontend\_update}}
+\doxysubsubsection{\texorpdfstring{BACKEND\_URL}{BACKEND\_URL}}
+{\footnotesize\ttfamily str frontend\+\_\+update.\+BACKEND\+\_\+\+URL = "{}http\+://localhost\+:8000/data"{}}
+
+
+
+Backend API endpoint for ESP sensor data. 
+
+
+
+Definition at line \mbox{\hyperlink{frontend__update_8py_source_l00031}{31}} of file \mbox{\hyperlink{frontend__update_8py_source}{frontend\+\_\+update.\+py}}.
+
+\Hypertarget{namespacefrontend__update_a3acb9fafb96b85c19919a7e7d84675d2}\label{namespacefrontend__update_a3acb9fafb96b85c19919a7e7d84675d2} 
+\index{frontend\_update@{frontend\_update}!city@{city}}
+\index{city@{city}!frontend\_update@{frontend\_update}}
+\doxysubsubsection{\texorpdfstring{city}{city}}
+{\footnotesize\ttfamily frontend\+\_\+update.\+city = st.\+text\+\_\+input("{}🌍 Enter city name\+:"{}, "{}Ettimadai"{}).strip()}
+
+
+
+User input field to select a city for Open\+Weather data. 
+
+
+
+Definition at line \mbox{\hyperlink{frontend__update_8py_source_l00095}{95}} of file \mbox{\hyperlink{frontend__update_8py_source}{frontend\+\_\+update.\+py}}.
+
+\Hypertarget{namespacefrontend__update_a08c7e909960b338241cdd64946d3d47a}\label{namespacefrontend__update_a08c7e909960b338241cdd64946d3d47a} 
+\index{frontend\_update@{frontend\_update}!cols@{cols}}
+\index{cols@{cols}!frontend\_update@{frontend\_update}}
+\doxysubsubsection{\texorpdfstring{cols}{cols}}
+{\footnotesize\ttfamily frontend\+\_\+update.\+cols = st.\+columns(len(\mbox{\hyperlink{namespacefrontend__update_aad3fe74b25176529b906421d2d25df14}{sorted\+\_\+nodes}}))}
+
+
+
+Definition at line \mbox{\hyperlink{frontend__update_8py_source_l00259}{259}} of file \mbox{\hyperlink{frontend__update_8py_source}{frontend\+\_\+update.\+py}}.
+
+\Hypertarget{namespacefrontend__update_a1c190857fec1da200982ee78a67cbbc6}\label{namespacefrontend__update_a1c190857fec1da200982ee78a67cbbc6} 
+\index{frontend\_update@{frontend\_update}!cols\_top@{cols\_top}}
+\index{cols\_top@{cols\_top}!frontend\_update@{frontend\_update}}
+\doxysubsubsection{\texorpdfstring{cols\_top}{cols\_top}}
+{\footnotesize\ttfamily frontend\+\_\+update.\+cols\+\_\+top = st.\+columns(\mbox{[}3, 2\mbox{]})}
+
+
+
+Continuous dashboard update loop. 
+
+Refreshes every 5 seconds to fetch and render updated weather and ESP data. 
+
+Definition at line \mbox{\hyperlink{frontend__update_8py_source_l00213}{213}} of file \mbox{\hyperlink{frontend__update_8py_source}{frontend\+\_\+update.\+py}}.
+
+\Hypertarget{namespacefrontend__update_abd1d56baaa4d2a49d31558239426c905}\label{namespacefrontend__update_abd1d56baaa4d2a49d31558239426c905} 
+\index{frontend\_update@{frontend\_update}!desc@{desc}}
+\index{desc@{desc}!frontend\_update@{frontend\_update}}
+\doxysubsubsection{\texorpdfstring{desc}{desc}}
+{\footnotesize\ttfamily frontend\+\_\+update.\+desc = \mbox{\hyperlink{namespacefrontend__update_a36bf6012490bd2371d7a1c56c70502e2}{ow\+\_\+data}}\mbox{[}"{}weather"{}\mbox{]}\mbox{[}0\mbox{]}\mbox{[}"{}description"{}\mbox{]}.capitalize()}
+
+
+
+Definition at line \mbox{\hyperlink{frontend__update_8py_source_l00222}{222}} of file \mbox{\hyperlink{frontend__update_8py_source}{frontend\+\_\+update.\+py}}.
+
+\Hypertarget{namespacefrontend__update_a74062a17660a353467703d895b65889c}\label{namespacefrontend__update_a74062a17660a353467703d895b65889c} 
+\index{frontend\_update@{frontend\_update}!emoji@{emoji}}
+\index{emoji@{emoji}!frontend\_update@{frontend\_update}}
+\doxysubsubsection{\texorpdfstring{emoji}{emoji}}
+{\footnotesize\ttfamily frontend\+\_\+update.\+emoji = \mbox{\hyperlink{namespacefrontend__update_a157e071b3a485a21b612f93d77fbd8c4}{get\+\_\+weather\+\_\+emoji}}(\mbox{\hyperlink{namespacefrontend__update_a2ba2680e02978111c7312f0463f6965a}{temp}}, \mbox{\hyperlink{namespacefrontend__update_aedce4cc864b7c7c92151d84e803620a5}{hum}})}
+
+
+
+Definition at line \mbox{\hyperlink{frontend__update_8py_source_l00264}{264}} of file \mbox{\hyperlink{frontend__update_8py_source}{frontend\+\_\+update.\+py}}.
+
+\Hypertarget{namespacefrontend__update_af83196b5ad18ee88953519ffdc31cbd9}\label{namespacefrontend__update_af83196b5ad18ee88953519ffdc31cbd9} 
+\index{frontend\_update@{frontend\_update}!esp\_data@{esp\_data}}
+\index{esp\_data@{esp\_data}!frontend\_update@{frontend\_update}}
+\doxysubsubsection{\texorpdfstring{esp\_data}{esp\_data}}
+{\footnotesize\ttfamily frontend\+\_\+update.\+esp\+\_\+data = \mbox{\hyperlink{namespacefrontend__update_a1c85d744e929d9f1b2895250edf56c25}{fetch\+\_\+esp\+\_\+data}}()}
+
+
+
+Definition at line \mbox{\hyperlink{frontend__update_8py_source_l00254}{254}} of file \mbox{\hyperlink{frontend__update_8py_source}{frontend\+\_\+update.\+py}}.
+
+\Hypertarget{namespacefrontend__update_aedce4cc864b7c7c92151d84e803620a5}\label{namespacefrontend__update_aedce4cc864b7c7c92151d84e803620a5} 
+\index{frontend\_update@{frontend\_update}!hum@{hum}}
+\index{hum@{hum}!frontend\_update@{frontend\_update}}
+\doxysubsubsection{\texorpdfstring{hum}{hum}}
+{\footnotesize\ttfamily frontend\+\_\+update.\+hum = \mbox{\hyperlink{namespacefrontend__update_a36bf6012490bd2371d7a1c56c70502e2}{ow\+\_\+data}}\mbox{[}"{}main"{}\mbox{]}\mbox{[}"{}humidity"{}\mbox{]}}
+
+
+
+Definition at line \mbox{\hyperlink{frontend__update_8py_source_l00220}{220}} of file \mbox{\hyperlink{frontend__update_8py_source}{frontend\+\_\+update.\+py}}.
+
+\Hypertarget{namespacefrontend__update_aaabb781cbf7ec971e46962b35d851458}\label{namespacefrontend__update_aaabb781cbf7ec971e46962b35d851458} 
+\index{frontend\_update@{frontend\_update}!icon@{icon}}
+\index{icon@{icon}!frontend\_update@{frontend\_update}}
+\doxysubsubsection{\texorpdfstring{icon}{icon}}
+{\footnotesize\ttfamily frontend\+\_\+update.\+icon = \mbox{\hyperlink{namespacefrontend__update_a36bf6012490bd2371d7a1c56c70502e2}{ow\+\_\+data}}\mbox{[}"{}weather"{}\mbox{]}\mbox{[}0\mbox{]}\mbox{[}"{}icon"{}\mbox{]}}
+
+
+
+Definition at line \mbox{\hyperlink{frontend__update_8py_source_l00223}{223}} of file \mbox{\hyperlink{frontend__update_8py_source}{frontend\+\_\+update.\+py}}.
+
+\Hypertarget{namespacefrontend__update_abc82edf35fc263707c1a115558628e32}\label{namespacefrontend__update_abc82edf35fc263707c1a115558628e32} 
+\index{frontend\_update@{frontend\_update}!layout@{layout}}
+\index{layout@{layout}!frontend\_update@{frontend\_update}}
+\doxysubsubsection{\texorpdfstring{layout}{layout}}
+{\footnotesize\ttfamily frontend\+\_\+update.\+layout}
+
+
+
+Definition at line \mbox{\hyperlink{frontend__update_8py_source_l00045}{45}} of file \mbox{\hyperlink{frontend__update_8py_source}{frontend\+\_\+update.\+py}}.
+
+\Hypertarget{namespacefrontend__update_a92cd27ab8598d2dc1da8da8a54ee1ae3}\label{namespacefrontend__update_a92cd27ab8598d2dc1da8da8a54ee1ae3} 
+\index{frontend\_update@{frontend\_update}!now@{now}}
+\index{now@{now}!frontend\_update@{frontend\_update}}
+\doxysubsubsection{\texorpdfstring{now}{now}}
+{\footnotesize\ttfamily frontend\+\_\+update.\+now = datetime.\+now()}
+
+
+
+Definition at line \mbox{\hyperlink{frontend__update_8py_source_l00241}{241}} of file \mbox{\hyperlink{frontend__update_8py_source}{frontend\+\_\+update.\+py}}.
+
+\Hypertarget{namespacefrontend__update_acf4fce23114c30f90de9e72c4f6a4553}\label{namespacefrontend__update_acf4fce23114c30f90de9e72c4f6a4553} 
+\index{frontend\_update@{frontend\_update}!OPENWEATHER\_API@{OPENWEATHER\_API}}
+\index{OPENWEATHER\_API@{OPENWEATHER\_API}!frontend\_update@{frontend\_update}}
+\doxysubsubsection{\texorpdfstring{OPENWEATHER\_API}{OPENWEATHER\_API}}
+{\footnotesize\ttfamily str frontend\+\_\+update.\+OPENWEATHER\+\_\+\+API = "{}https\+://openweathermap.\+org/data/2.\+5/weather"{}}
+
+
+
+Base URL for Open\+Weather public API. 
+
+
+
+Definition at line \mbox{\hyperlink{frontend__update_8py_source_l00034}{34}} of file \mbox{\hyperlink{frontend__update_8py_source}{frontend\+\_\+update.\+py}}.
+
+\Hypertarget{namespacefrontend__update_a5d00a1fb26219c67f923ee1b6739f83d}\label{namespacefrontend__update_a5d00a1fb26219c67f923ee1b6739f83d} 
+\index{frontend\_update@{frontend\_update}!OPENWEATHER\_KEY@{OPENWEATHER\_KEY}}
+\index{OPENWEATHER\_KEY@{OPENWEATHER\_KEY}!frontend\_update@{frontend\_update}}
+\doxysubsubsection{\texorpdfstring{OPENWEATHER\_KEY}{OPENWEATHER\_KEY}}
+{\footnotesize\ttfamily str frontend\+\_\+update.\+OPENWEATHER\+\_\+\+KEY = "{}439d4b804bc8187953eb36d2a8c26a02"{}}
+
+
+
+Demo API key for Open\+Weather API. 
+
+\begin{DoxyNote}{Note}
+Replace with your own API key for full functionality. 
+\end{DoxyNote}
+
+
+Definition at line \mbox{\hyperlink{frontend__update_8py_source_l00038}{38}} of file \mbox{\hyperlink{frontend__update_8py_source}{frontend\+\_\+update.\+py}}.
+
+\Hypertarget{namespacefrontend__update_a36bf6012490bd2371d7a1c56c70502e2}\label{namespacefrontend__update_a36bf6012490bd2371d7a1c56c70502e2} 
+\index{frontend\_update@{frontend\_update}!ow\_data@{ow\_data}}
+\index{ow\_data@{ow\_data}!frontend\_update@{frontend\_update}}
+\doxysubsubsection{\texorpdfstring{ow\_data}{ow\_data}}
+{\footnotesize\ttfamily frontend\+\_\+update.\+ow\+\_\+data = \mbox{\hyperlink{namespacefrontend__update_a97fd40664bc7cfb18d6d7759bb0f548b}{fetch\+\_\+openweather\+\_\+data}}(\mbox{\hyperlink{namespacefrontend__update_a3acb9fafb96b85c19919a7e7d84675d2}{city}})}
+
+
+
+Definition at line \mbox{\hyperlink{frontend__update_8py_source_l00217}{217}} of file \mbox{\hyperlink{frontend__update_8py_source}{frontend\+\_\+update.\+py}}.
+
+\Hypertarget{namespacefrontend__update_a1fc022dd91d99494a6ad086a0e619177}\label{namespacefrontend__update_a1fc022dd91d99494a6ad086a0e619177} 
+\index{frontend\_update@{frontend\_update}!page\_title@{page\_title}}
+\index{page\_title@{page\_title}!frontend\_update@{frontend\_update}}
+\doxysubsubsection{\texorpdfstring{page\_title}{page\_title}}
+{\footnotesize\ttfamily frontend\+\_\+update.\+page\+\_\+title}
+
+
+
+Configure Streamlit application layout and appearance. 
+
+
+
+Definition at line \mbox{\hyperlink{frontend__update_8py_source_l00045}{45}} of file \mbox{\hyperlink{frontend__update_8py_source}{frontend\+\_\+update.\+py}}.
+
+\Hypertarget{namespacefrontend__update_aab39ab7fd64debe58638ffa410fa51c2}\label{namespacefrontend__update_aab39ab7fd64debe58638ffa410fa51c2} 
+\index{frontend\_update@{frontend\_update}!placeholder@{placeholder}}
+\index{placeholder@{placeholder}!frontend\_update@{frontend\_update}}
+\doxysubsubsection{\texorpdfstring{placeholder}{placeholder}}
+{\footnotesize\ttfamily frontend\+\_\+update.\+placeholder = st.\+empty()}
+
+
+
+Streamlit placeholder for dynamic dashboard updates. 
+
+
+
+Definition at line \mbox{\hyperlink{frontend__update_8py_source_l00098}{98}} of file \mbox{\hyperlink{frontend__update_8py_source}{frontend\+\_\+update.\+py}}.
+
+\Hypertarget{namespacefrontend__update_aad3fe74b25176529b906421d2d25df14}\label{namespacefrontend__update_aad3fe74b25176529b906421d2d25df14} 
+\index{frontend\_update@{frontend\_update}!sorted\_nodes@{sorted\_nodes}}
+\index{sorted\_nodes@{sorted\_nodes}!frontend\_update@{frontend\_update}}
+\doxysubsubsection{\texorpdfstring{sorted\_nodes}{sorted\_nodes}}
+{\footnotesize\ttfamily frontend\+\_\+update.\+sorted\+\_\+nodes = sorted(esp\+\_\+data.\+items(), key=lambda x\+: int(x\mbox{[}0\mbox{]}))}
+
+
+
+Definition at line \mbox{\hyperlink{frontend__update_8py_source_l00258}{258}} of file \mbox{\hyperlink{frontend__update_8py_source}{frontend\+\_\+update.\+py}}.
+
+\Hypertarget{namespacefrontend__update_a2ba2680e02978111c7312f0463f6965a}\label{namespacefrontend__update_a2ba2680e02978111c7312f0463f6965a} 
+\index{frontend\_update@{frontend\_update}!temp@{temp}}
+\index{temp@{temp}!frontend\_update@{frontend\_update}}
+\doxysubsubsection{\texorpdfstring{temp}{temp}}
+{\footnotesize\ttfamily frontend\+\_\+update.\+temp = \mbox{\hyperlink{namespacefrontend__update_a36bf6012490bd2371d7a1c56c70502e2}{ow\+\_\+data}}\mbox{[}"{}main"{}\mbox{]}\mbox{[}"{}temp"{}\mbox{]}}
+
+
+
+Definition at line \mbox{\hyperlink{frontend__update_8py_source_l00219}{219}} of file \mbox{\hyperlink{frontend__update_8py_source}{frontend\+\_\+update.\+py}}.
+
+\Hypertarget{namespacefrontend__update_ab725a42c14e11f03fb30d3cb1e3e48ab}\label{namespacefrontend__update_ab725a42c14e11f03fb30d3cb1e3e48ab} 
+\index{frontend\_update@{frontend\_update}!timestamp@{timestamp}}
+\index{timestamp@{timestamp}!frontend\_update@{frontend\_update}}
+\doxysubsubsection{\texorpdfstring{timestamp}{timestamp}}
+{\footnotesize\ttfamily frontend\+\_\+update.\+timestamp = node\+\_\+data.\+get("{}timestamp"{}, "{}N/A"{})}
+
+
+
+Definition at line \mbox{\hyperlink{frontend__update_8py_source_l00263}{263}} of file \mbox{\hyperlink{frontend__update_8py_source}{frontend\+\_\+update.\+py}}.
+
+\Hypertarget{namespacefrontend__update_aae303daff2ba22b8540f529e71c475cc}\label{namespacefrontend__update_aae303daff2ba22b8540f529e71c475cc} 
+\index{frontend\_update@{frontend\_update}!unsafe\_allow\_html@{unsafe\_allow\_html}}
+\index{unsafe\_allow\_html@{unsafe\_allow\_html}!frontend\_update@{frontend\_update}}
+\doxysubsubsection{\texorpdfstring{unsafe\_allow\_html}{unsafe\_allow\_html}}
+{\footnotesize\ttfamily frontend\+\_\+update.\+unsafe\+\_\+allow\+\_\+html}
+
+
+
+Apply custom dark-\/themed CSS styling for the dashboard. 
+
+
+
+Definition at line \mbox{\hyperlink{frontend__update_8py_source_l00085}{85}} of file \mbox{\hyperlink{frontend__update_8py_source}{frontend\+\_\+update.\+py}}.
+
+\Hypertarget{namespacefrontend__update_a27779f5238aab17f7ca5d0a335ec0001}\label{namespacefrontend__update_a27779f5238aab17f7ca5d0a335ec0001} 
+\index{frontend\_update@{frontend\_update}!wind@{wind}}
+\index{wind@{wind}!frontend\_update@{frontend\_update}}
+\doxysubsubsection{\texorpdfstring{wind}{wind}}
+{\footnotesize\ttfamily frontend\+\_\+update.\+wind = \mbox{\hyperlink{namespacefrontend__update_a36bf6012490bd2371d7a1c56c70502e2}{ow\+\_\+data}}\mbox{[}"{}wind"{}\mbox{]}\mbox{[}"{}speed"{}\mbox{]}}
+
+
+
+Definition at line \mbox{\hyperlink{frontend__update_8py_source_l00221}{221}} of file \mbox{\hyperlink{frontend__update_8py_source}{frontend\+\_\+update.\+py}}.
+

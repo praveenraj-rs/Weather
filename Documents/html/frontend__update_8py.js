@@ -1,0 +1,28 @@
+var frontend__update_8py =
+[
+    [ "fetch_esp_data", "frontend__update_8py.html#a1c85d744e929d9f1b2895250edf56c25", null ],
+    [ "fetch_openweather_data", "frontend__update_8py.html#a97fd40664bc7cfb18d6d7759bb0f548b", null ],
+    [ "get_weather_emoji", "frontend__update_8py.html#a157e071b3a485a21b612f93d77fbd8c4", null ],
+    [ "render_footer", "frontend__update_8py.html#a3f89ca40cf37ac36f695a90905c51a05", null ],
+    [ "BACKEND_URL", "frontend__update_8py.html#a776cd2c9f35e2ea0f1435d21b1db4cc9", null ],
+    [ "city", "frontend__update_8py.html#a3acb9fafb96b85c19919a7e7d84675d2", null ],
+    [ "cols", "frontend__update_8py.html#a08c7e909960b338241cdd64946d3d47a", null ],
+    [ "cols_top", "frontend__update_8py.html#a1c190857fec1da200982ee78a67cbbc6", null ],
+    [ "desc", "frontend__update_8py.html#abd1d56baaa4d2a49d31558239426c905", null ],
+    [ "emoji", "frontend__update_8py.html#a74062a17660a353467703d895b65889c", null ],
+    [ "esp_data", "frontend__update_8py.html#af83196b5ad18ee88953519ffdc31cbd9", null ],
+    [ "hum", "frontend__update_8py.html#aedce4cc864b7c7c92151d84e803620a5", null ],
+    [ "icon", "frontend__update_8py.html#aaabb781cbf7ec971e46962b35d851458", null ],
+    [ "layout", "frontend__update_8py.html#abc82edf35fc263707c1a115558628e32", null ],
+    [ "now", "frontend__update_8py.html#a92cd27ab8598d2dc1da8da8a54ee1ae3", null ],
+    [ "OPENWEATHER_API", "frontend__update_8py.html#acf4fce23114c30f90de9e72c4f6a4553", null ],
+    [ "OPENWEATHER_KEY", "frontend__update_8py.html#a5d00a1fb26219c67f923ee1b6739f83d", null ],
+    [ "ow_data", "frontend__update_8py.html#a36bf6012490bd2371d7a1c56c70502e2", null ],
+    [ "page_title", "frontend__update_8py.html#a1fc022dd91d99494a6ad086a0e619177", null ],
+    [ "placeholder", "frontend__update_8py.html#aab39ab7fd64debe58638ffa410fa51c2", null ],
+    [ "sorted_nodes", "frontend__update_8py.html#aad3fe74b25176529b906421d2d25df14", null ],
+    [ "temp", "frontend__update_8py.html#a2ba2680e02978111c7312f0463f6965a", null ],
+    [ "timestamp", "frontend__update_8py.html#ab725a42c14e11f03fb30d3cb1e3e48ab", null ],
+    [ "unsafe_allow_html", "frontend__update_8py.html#aae303daff2ba22b8540f529e71c475cc", null ],
+    [ "wind", "frontend__update_8py.html#a27779f5238aab17f7ca5d0a335ec0001", null ]
+];
