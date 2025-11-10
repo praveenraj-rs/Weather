@@ -6,14 +6,14 @@
 #define DHTTYPE DHT11   // or DHT22
 DHT dht(DHTPIN, DHTTYPE);
 
-const char* ssid = "weather";
-const char* password = "1234567890";
-const char* serverName = "http://<YOUR_PC_IP>:8000/update";
+const char* ssid = "ESS";
+const char* password = "12345678";
+const char* serverName = "http://192.168.131.95:8000/update";
 
 const char* node_id = "1"; // Change for each ESP node (e.g., "2", "3")
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(9600);
   WiFi.begin(ssid, password);
   Serial.print("Connecting to WiFi...");
   while (WiFi.status() != WL_CONNECTED) {
