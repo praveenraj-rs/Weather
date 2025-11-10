@@ -69,7 +69,7 @@ while True:
             if not data:
                 st.info("Waiting for ESP nodes to send data...")
             else:
-                # ✅ Sort the node IDs numerically
+                # Sort the node IDs numerically
                 sorted_nodes = sorted(data.items(), key=lambda x: int(x[0]))
 
                 cols = st.columns(len(sorted_nodes))
