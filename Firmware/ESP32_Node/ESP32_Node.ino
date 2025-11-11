@@ -14,7 +14,7 @@ DHT dht(DHTPIN, DHTTYPE);
 // -----------------------------
 const char* ssid = "ESS";
 const char* password = "12345678";
-const char* serverName = "http://192.168.131.95:8000/update";
+const char* serverName = "http://192.168.231.95:8000/update";
 
 const char* node_id = "1";  // Change for each ESP node (e.g. "2", "3")
 
